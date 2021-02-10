@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Colsci book</title>
-  <meta name="description" content="Colsci book" />
+  <title>Chapter 3 Overview | Colsci book</title>
+  <meta name="description" content="Chapter 3 Overview | Colsci book" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Colsci book" />
+  <meta property="og:title" content="Chapter 3 Overview | Colsci book" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="bisaloo/colsci-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Colsci book" />
+  <meta name="twitter:title" content="Chapter 3 Overview | Colsci book" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="importing-processing-and-visualising-data.html"/>
+<link rel="prev" href="importing-processing-and-visualising-data.html"/>
+<link rel="next" href="analysing-data.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -253,12 +253,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Colsci book</h1>
-<p class="date"><em>2021-02-10</em></p>
-</div>
-<div id="overview" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Overview</h1>
+<div id="overview-2" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Overview</h1>
 <p><code>pavo</code> is an <code>R</code> package developed with the goal of establishing a flexible and integrated workflow for working with spectral and spatial colour data. It includes functions that take advantage of new data classes to work seamlessly from importing raw spectra and images, to visualisation and analysis. It provides flexible ways to input spectral data from a variety of equipment manufacturers, process these data, extract variables, and produce publication-quality figures.</p>
 <p><code>pavo</code> was written with the following workflow in mind:</p>
 <ol style="list-style-type: decimal">
@@ -266,27 +262,27 @@ div.csl-indent {
 <li><strong>Analyse</strong> the resulting files, using spectral analyses of shape (hue, saturation, brightness), visual models based on perceptual data, and/or spatial adjacency and boundary strength analyses.</li>
 <li><strong>Visualise</strong> the output, with multiple options provided for exploration and analysis.</li>
 </ol>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span id="fig:unnamed-chunk-36"></span>
 <img src="https://raw.githubusercontent.com/rmaia/pavo/master/vignettes/fig/workflow.png" alt="A non-exhaustive overview of the colour-pattern analysis workflow in pavo, as of version 2.0, displaying some key functions at each stage." width="100%" />
 <p class="caption">
-Figure 1.1: A non-exhaustive overview of the colour-pattern analysis workflow in pavo, as of version 2.0, displaying some key functions at each stage.
+Figure 3.1: A non-exhaustive overview of the colour-pattern analysis workflow in pavo, as of version 2.0, displaying some key functions at each stage.
 </p>
 </div>
 <p>In the included vignettes we begin by detailing the <a href="pavo-2-importing_processing.html">importing, processing and visualisation</a> of spectral and image data, before moving on to discussion of the <a href="pavo-3-analysing.html">flexible analyses</a> of such data that <code>pavo</code> allows. Our hope is to demonstrate the flexibility of <code>pavo</code>, and to provide a cohesive, reproducible workflow for colour pattern analysis within <code>R</code>. As always, the development version of <code>pavo</code> can be found on <a href="https://github.com/rmaia/pavo">github</a>, while the stable release is available via CRAN.</p>
-<div id="classes-and-attributes" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Classes and Attributes</h2>
+<div id="classes-and-attributes-1" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Classes and Attributes</h2>
 <p>To enable the comprehensive workflow of <code>pavo</code>, we’ve implemented an expanded class system. Spectra will be of class <code>rspec</code> as long as we use one of <code>pavo</code>’s spectral import or processing functions, or explicitly convert an object using <code>as.rspec()</code>. Similarly, images will be of class <code>rimg</code> when imported via <code>getimg()</code>, or if converted using <code>as.rimg()</code>. The results of <code>vismodel()</code> are objects of class <code>vismodel</code> and the results of <code>colspace()</code> are, unsurprisingly, objects of class <code>colspace</code>. Most of these classes inherit from <code>data.frame</code>, and contain a suite of attributes that describe the object’s characteristics (e.g. options used in visual modelling such as the selected visual system and illuminant, and properties of the modelled colourspace). These are easily viewed using the <code>summary</code> function (on any <code>rspec</code>, <code>rimg</code>, <code>vismodel</code>, or <code>colspace</code> object), which will return the attributes and summary data (where appropriate) in a readable format.</p>
 </div>
-<div id="suggestions-and-assistance" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Suggestions and Assistance</h2>
+<div id="suggestions-and-assistance-1" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Suggestions and Assistance</h2>
 <p>For suggestions, assistance and/or bug reports, we suggest getting in touch by sending an email to <a href="mailto:r-pavo@googlegroups.com" class="email">r-pavo@googlegroups.com</a>, which is a public mailing list for all things pavo. If you have a bug to report, we’d appreciate it if you could also include a reproducible example when possible. Users familiar with git may prefer to open an issue on the project’s <a href="https://github.com/rmaia/pavo">github page</a>, or to make a pull-request directly.</p>
 </div>
-<div id="citation-of-methods-implemented-in-pavo" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Citation of methods implemented in <code>pavo</code></h2>
+<div id="citation-of-methods-implemented-in-pavo-1" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Citation of methods implemented in <code>pavo</code></h2>
 <p>Most of the methods implemented in <code>pavo</code> have been thoroughly described in their original publications, to which users should refer for details and interpretation. For reflectance shape variables (“objective colourimetrics”) and their particular relation to signal production and perception, see <span class="citation"><a href="#ref-Andersson2006" role="doc-biblioref">Andersson and Prager</a> (<a href="#ref-Andersson2006" role="doc-biblioref">2006</a>)</span> and <span class="citation"><a href="#ref-Montgomerie2006" role="doc-biblioref">Montgomerie</a> (<a href="#ref-Montgomerie2006" role="doc-biblioref">2006</a>)</span>. Visual models based on photon catches and receptor noise are detailed in <span class="citation"><a href="#ref-Vorobyev1998" role="doc-biblioref">Vorobyev et al.</a> (<a href="#ref-Vorobyev1998" role="doc-biblioref">1998</a>)</span> and <span class="citation"><a href="#ref-Vorobyev1998" role="doc-biblioref">Vorobyev et al.</a> (<a href="#ref-Vorobyev1998" role="doc-biblioref">1998</a>)</span>, and photoreceptor sensitivity curve estimation in <span class="citation"><a href="#ref-Govardovskii2000" role="doc-biblioref">Govardovskii et al.</a> (<a href="#ref-Govardovskii2000" role="doc-biblioref">2000</a>)</span> and <span class="citation"><a href="#ref-Hart2005" role="doc-biblioref">Hart and Vorobyev</a> (<a href="#ref-Hart2005" role="doc-biblioref">2005</a>)</span>. For tetrahedral colourspace model implementations and variable calculations, see <span class="citation"><a href="#ref-Endler2005" role="doc-biblioref">Endler and Mielke</a> (<a href="#ref-Endler2005" role="doc-biblioref">2005</a>)</span> and <span class="citation"><a href="#ref-Stoddard2008" role="doc-biblioref">Stoddard and Prum</a> (<a href="#ref-Stoddard2008" role="doc-biblioref">2008</a>)</span>, and for colour volume overlap see <span class="citation"><a href="#ref-Stoddard2008" role="doc-biblioref">Stoddard and Prum</a> (<a href="#ref-Stoddard2008" role="doc-biblioref">2008</a>)</span> and <span class="citation"><a href="#ref-Stoddard2011" role="doc-biblioref">Stoddard and Stevens</a> (<a href="#ref-Stoddard2011" role="doc-biblioref">2011</a>)</span>. Adjacency and boundary strength analyses are described in <span class="citation"><a href="#ref-Endler2012" role="doc-biblioref">Endler</a> (<a href="#ref-Endler2012" role="doc-biblioref">2012</a>)</span> and <span class="citation"><a href="#ref-Endler2018" role="doc-biblioref">Endler, Cole, and Kranz</a> (<a href="#ref-Endler2018" role="doc-biblioref">2018</a>)</span>, while overall pattern contrast is detailed in <span class="citation"><a href="#ref-Endler2005" role="doc-biblioref">Endler and Mielke</a> (<a href="#ref-Endler2005" role="doc-biblioref">2005</a>)</span>. Users of the functions that apply these methods must cite the original sources as appropriate, along with <code>pavo</code> itself.</p>
 </div>
-<div id="acknowledgements" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Acknowledgements</h2>
+<div id="acknowledgements-1" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Acknowledgements</h2>
 <p>We would like to thank Matthew D. Shawkey and Stephanie M. Doucet for insights and support, and Jarrod D. Hadfield and Mary Caswell Stoddard for sharing code that helped us develop some of <code>pavo</code>’s capabilities.</p>
 
 </div>
@@ -329,8 +325,8 @@ Vorobyev, Misha, Daniel Colaco Osorio, Andrew T. D. Bennett, N. Justin Marshall,
           </div>
         </div>
       </div>
-
-<a href="importing-processing-and-visualising-data.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="importing-processing-and-visualising-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -361,7 +357,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/colsci-book/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/colsci-book/edit/master/01-overview.Rmd",
 "text": "Edit"
 },
 "history": {
