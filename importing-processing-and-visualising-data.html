@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook for studying colour in R</title>
-  <meta name="description" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook for studying colour in R" />
+  <title>Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R</title>
+  <meta name="description" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook for studying colour in R" />
+  <meta property="og:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="bisaloo/colsci-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook for studying colour in R" />
+  <meta name="twitter:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R" />
   
   
   
@@ -162,10 +162,10 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">The pavo handbook for studying colour in R</a></li>
+<li><a href="./">The pavo handbook: studying biological colouration in R</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Package Overview</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#classes-and-attributes"><i class="fa fa-check"></i><b>1.1</b> Classes and Attributes</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#suggestions-and-assistance"><i class="fa fa-check"></i><b>1.2</b> Suggestions and Assistance</a></li>
@@ -199,7 +199,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="importing-processing-and-visualising-data.html"><a href="importing-processing-and-visualising-data.html#processing-image-data"><i class="fa fa-check"></i><b>2.6</b> Processing Image Data</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="importing-processing-and-visualising-data.html"><a href="importing-processing-and-visualising-data.html#overview-1"><i class="fa fa-check"></i><b>2.6.1</b> Overview</a></li>
+<li class="chapter" data-level="2.6.1" data-path="importing-processing-and-visualising-data.html"><a href="importing-processing-and-visualising-data.html#overview"><i class="fa fa-check"></i><b>2.6.1</b> Overview</a></li>
 <li class="chapter" data-level="2.6.2" data-path="importing-processing-and-visualising-data.html"><a href="importing-processing-and-visualising-data.html#setting-scales-and-defining-objects"><i class="fa fa-check"></i><b>2.6.2</b> Setting Scales and Defining Objects</a></li>
 </ul></li>
 </ul></li>
@@ -208,7 +208,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="analysing-data.html"><a href="analysing-data.html#analysing-spectral-data"><i class="fa fa-check"></i><b>3.1</b> Analysing Spectral Data</a>
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="analysing-data.html"><a href="analysing-data.html#spectral-dataset-description-1"><i class="fa fa-check"></i><b>3.1.1</b> Spectral Dataset Description</a></li>
-<li class="chapter" data-level="3.1.2" data-path="analysing-data.html"><a href="analysing-data.html#overview-2"><i class="fa fa-check"></i><b>3.1.2</b> Overview</a></li>
+<li class="chapter" data-level="3.1.2" data-path="analysing-data.html"><a href="analysing-data.html#overview-1"><i class="fa fa-check"></i><b>3.1.2</b> Overview</a></li>
 <li class="chapter" data-level="3.1.3" data-path="analysing-data.html"><a href="analysing-data.html#spectral-shape-analysis"><i class="fa fa-check"></i><b>3.1.3</b> Spectral Shape Analysis</a></li>
 <li class="chapter" data-level="3.1.4" data-path="analysing-data.html"><a href="analysing-data.html#visual-modelling"><i class="fa fa-check"></i><b>3.1.4</b> Visual Modelling</a></li>
 </ul></li>
@@ -238,7 +238,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The pavo handbook for studying colour in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The pavo handbook: studying biological colouration in R</a>
           </h1>
         </div>
 
@@ -704,7 +704,7 @@ Figure 2.10: Raw images of our butterflies
 </div>
 <div id="processing-image-data" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Processing Image Data</h2>
-<div id="overview-1" class="section level3" number="2.6.1">
+<div id="overview" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Overview</h3>
 <p>Images often require some post-capture processing, depending on the intended use, and <code>pavo</code> offers some useful options via <code>procimg()</code>. The functionality of <code>procimg()</code> is currently limited to only that which is closely relevant to the analyses currently implemented, as we assume any major processing and quality-checking (e.g. image rotation and colour correction) is undertaken by the user beforehand. However, should users with to keep their image processing within the R ecosystem, there now exist several excellent image-processing packages such as <code>imager</code> and <code>magick</code>, which <code>pavo</code> can seamlessly work with. Indeed, the functions <code>rimg2cimg()</code> and <code>rimg2magick()</code> convert images from <code>pavo</code> preferred structure to that used by <code>imager</code> (with the reverse simply achieved via <code>as.rimg()</code>), which simplifies the transitions between these packages.</p>
 </div>
