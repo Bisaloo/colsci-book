@@ -296,16 +296,16 @@ div.csl-indent {
 ## 4 parakeet 29.86504 572  126     63     63      Yes
 ## 5    robin 37.85542 700   NA    107     NA      Yes
 ## 6  tanager 30.48108 557  166     81     85      Yes</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-41"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-41-1.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-41-2.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-41-3.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-41-4.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-41-5.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-41-6.png" alt="Plots from `peakshape`" width="30%" />
+<div class="figure"><span id="fig:unnamed-chunk-42"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-42-1.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-42-2.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-42-3.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-42-4.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-42-5.png" alt="Plots from `peakshape`" width="30%" /><img src="colsci-book_files/figure-html/unnamed-chunk-42-6.png" alt="Plots from `peakshape`" width="30%" />
 <p class="caption">
 Figure 3.1: Plots from <code>peakshape</code>
 </p>
 </div>
 <p>As it can be seen, the variable FWHM is meaningless if the curve doesn’t have a clear peak. Sometimes, such as in the case of the Cardinal (Above figure, first panel), there might be a peak which is not the point of maximum reflectance of the entire spectral curve. <code>peakshape()</code> also offers a <code>select</code> argument to facilitate subsetting the spectra data frame to, for example, focus on a single reflectance peak:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="analysing-data.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">peakshape</span>(spec.sm, <span class="at">select =</span> <span class="dv">2</span>, <span class="at">lim =</span> <span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">500</span>), <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-42"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-42-1.png" alt="Plot from `peakshape`, setting the wavelength limits to 300 and 500 nm" width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-43"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-43-1.png" alt="Plot from `peakshape`, setting the wavelength limits to 300 and 500 nm" width="480" />
 <p class="caption">
 Figure 3.2: Plot from <code>peakshape</code>, setting the wavelength limits to 300 and 500 nm
 </p>
@@ -343,7 +343,7 @@ Figure 3.2: Plot from <code>peakshape</code>, setting the wavelength limits to 3
 <h4><span class="header-section-number">3.1.4.3</span> Visual Phenotypes</h4>
 <p><code>pavo</code> contains numerous di-, tri- and tetrachromatic visual systems, to accompany the suite of new models. The full complement of included systems are accessible via the <code>vismodel()</code> argument <code>visual</code>, and include:</p>
 <table>
-<caption><span id="tab:unnamed-chunk-44">Table 3.1: </span>Built-in visual phenotypes available in pavo</caption>
+<caption><span id="tab:unnamed-chunk-45">Table 3.1: </span>Built-in visual phenotypes available in pavo</caption>
 <colgroup>
 <col width="10%" />
 <col width="89%" />
@@ -485,8 +485,8 @@ Where <span class="math inline">\(\lambda\)</span> denotes the wavelength, <span
 <span id="cb112-16"><a href="analysing-data.html#cb112-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb112-17"><a href="analysing-data.html#cb112-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Wavelength (nm)&quot;</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">outer =</span> <span class="cn">TRUE</span>, <span class="at">line =</span> <span class="dv">1</span>)</span>
 <span id="cb112-18"><a href="analysing-data.html#cb112-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Reflectance (%)&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">outer =</span> <span class="cn">TRUE</span>, <span class="at">line =</span> <span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-47"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-47-1.png" alt="Plots of species mean reflectance curves with corresponding relative usml cone stimulations (insets)." width="816" />
+<div class="figure"><span id="fig:unnamed-chunk-48"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-48-1.png" alt="Plots of species mean reflectance curves with corresponding relative usml cone stimulations (insets)." width="816" />
 <p class="caption">
 Figure 3.3: Plots of species mean reflectance curves with corresponding relative usml cone stimulations (insets).
 </p>
@@ -495,8 +495,8 @@ Figure 3.3: Plots of species mean reflectance curves with corresponding relative
 <p>As described above, <code>vismodel</code> also accepts user-defined visual systems, background and illuminants. We will illustrate this by showcasing the function <code>sensmodel</code>, which models spectral sensitivities of retinas based on their peak cone sensitivity, as described in <span class="citation"><a href="#ref-Govardovskii2000" role="doc-biblioref">Govardovskii et al.</a> (<a href="#ref-Govardovskii2000" role="doc-biblioref">2000</a>)</span> and <span class="citation"><a href="#ref-Hart2005" role="doc-biblioref">Hart and Vorobyev</a> (<a href="#ref-Hart2005" role="doc-biblioref">2005</a>)</span>. <code>sensmodel</code> takes several optional arguments, but the main one is a vector containing the peak sensitivities for the cones being modelled. Let’s model an idealized dichromat visual system, with cones peaking in sensitivity at 350 and 650 nm:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="analysing-data.html#cb114-1" aria-hidden="true" tabindex="-1"></a>idealizeddichromat <span class="ot">&lt;-</span> <span class="fu">sensmodel</span>(<span class="fu">c</span>(<span class="dv">350</span>, <span class="dv">650</span>))</span>
 <span id="cb114-2"><a href="analysing-data.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(idealizeddichromat, <span class="at">col =</span> <span class="fu">spec2rgb</span>(idealizeddichromat), <span class="at">ylab =</span> <span class="st">&quot;Absorbance&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-48"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-48-1.png" alt="Idealized dichromat photoreceptors created using `sensmodel`." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-49"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-49-1.png" alt="Idealized dichromat photoreceptors created using `sensmodel`." width="480" />
 <p class="caption">
 Figure 3.4: Idealized dichromat photoreceptors created using <code>sensmodel</code>.
 </p>
@@ -611,8 +611,8 @@ w_3^2(\Delta f_1 - \Delta f_2)^2 }{ (w_1w_2)^2 + (w_1w_3)^2 + (w_2w_3)^2 }}\]</s
 <span id="cb126-9"><a href="analysing-data.html#cb126-9" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">labels =</span> <span class="fu">rownames</span>(sicdist))</span>
 <span id="cb126-10"><a href="analysing-data.html#cb126-10" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, sicdist[, <span class="dv">2</span>], <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, sicdist[, <span class="dv">3</span>], <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># Add CI&#39;s</span></span>
 <span id="cb126-11"><a href="analysing-data.html#cb126-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># Add a &#39;threshold&#39; line at dS = 1</span></span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-54"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-54-1.png" alt="The bootstrapped colour distances between the throat, chest, and breast regions of male Sicalis citrina." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-55"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-55-1.png" alt="The bootstrapped colour distances between the throat, chest, and breast regions of male Sicalis citrina." width="480" />
 <p class="caption">
 Figure 3.5: The bootstrapped colour distances between the throat, chest, and breast regions of male Sicalis citrina.
 </p>
@@ -669,8 +669,8 @@ Figure 3.5: The bootstrapped colour distances between the throat, chest, and bre
 ## X6  31.912643 -23.368560 -24.79660 4.046863</code></pre>
 <p>which you can then plot as well:</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="analysing-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fakedata.cc, <span class="at">theta =</span> <span class="dv">55</span>, <span class="at">phi =</span> <span class="dv">25</span>, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakedata.c))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-57"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-57-1.png" alt="Spectral data in a receptor noise-corrected colourspace" width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-58"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-58-1.png" alt="Spectral data in a receptor noise-corrected colourspace" width="384" />
 <p class="caption">
 Figure 3.6: Spectral data in a receptor noise-corrected colourspace
 </p>
@@ -721,8 +721,8 @@ Figure 3.6: Spectral data in a receptor noise-corrected colourspace
 ## Faradaya_splendida    0.23166580 0.7683342  0.37948187 0.37948187  NA</code></pre>
 <p>The output contains values for the relative stimulation of short- and long-wavelength sensitive photoreceptors associated with each flower, along with its single coordinate in dichromatic space and its r.vector (distance from the origin). To visualise where these points lie, we can simply plot them on a segment.</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="analysing-data.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(di.flowers, <span class="at">col =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-60"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-60-1.png" alt="Flowers in a dichromatic colourspace, as modelled according to a canid visual system." width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-61"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-61-1.png" alt="Flowers in a dichromatic colourspace, as modelled according to a canid visual system." width="384" />
 <p class="caption">
 Figure 3.7: Flowers in a dichromatic colourspace, as modelled according to a canid visual system.
 </p>
@@ -749,8 +749,8 @@ Figure 3.7: Flowers in a dichromatic colourspace, as modelled according to a can
 ## Faradaya_splendida    -1.1811377 0.08981733  NA</code></pre>
 <p>As in the case of our dichromat, the output contains relative photoreceptor stimulations, coordinates in the Maxwell triangle, as well as the ‘hue angle’ <code>h.theta</code> and distance from the origin (<code>r.vec</code>).</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="analysing-data.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tri.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-62"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-62-1.png" alt="Floral reflectance in a Maxwell triangle, considering a honeybee visual system." width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-63"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-63-1.png" alt="Floral reflectance in a Maxwell triangle, considering a honeybee visual system." width="384" />
 <p class="caption">
 Figure 3.8: Floral reflectance in a Maxwell triangle, considering a honeybee visual system.
 </p>
@@ -792,8 +792,8 @@ Figure 3.8: Floral reflectance in a Maxwell triangle, considering a honeybee vis
 <p>Tetrahedral data (via <code>colspace(space = 'tcs')</code>) may be plotted in a standard <em>static</em> tetrahedron by using <code>plot()</code>, or can be visualised as part of an <em>interactive</em> tetrahedron by using <code>tcsplot()</code> with the accessory functions <code>tcspoints()</code> and <code>tcsvol()</code> for adding points and convex hulls, respectively. As with other colourspace plots there are a number of associated graphical options, though the <code>theta</code> and <code>phi</code> arguments are particularly useful in this case, as they control the orientation (in degrees) of the tetrahedron in the xy and yz planes, respectively.</p>
 <p>When plotting the tetrahedral colourspace, one can also force perspective by changing the size of points relative to their distance from the plane of observation, using the arguments <code>perspective = TRUE</code> and controlling the size range with the <code>range</code> argument. Several other options control the appearance of this plot, you can check these using <code>?plot.colspace</code> or <code>?tetraplot</code></p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="analysing-data.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tetra.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers), <span class="at">perspective =</span> <span class="cn">TRUE</span>, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">cex =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-64"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-64-1.png" alt="Flowers in a tetrahedral colourspace modelled using the visual phenotype of the blue tit. Point size is used to force perspective" width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-65"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-65-1.png" alt="Flowers in a tetrahedral colourspace modelled using the visual phenotype of the blue tit. Point size is used to force perspective" width="480" />
 <p class="caption">
 Figure 3.9: Flowers in a tetrahedral colourspace modelled using the visual phenotype of the blue tit. Point size is used to force perspective
 </p>
@@ -807,16 +807,16 @@ Figure 3.9: Flowers in a tetrahedral colourspace modelled using the visual pheno
 <span id="cb142-2"><a href="analysing-data.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axistetra</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">1.8</span>)</span>
 <span id="cb142-3"><a href="analysing-data.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tetra.flowers, <span class="at">theta =</span> <span class="dv">110</span>, <span class="at">phi =</span> <span class="dv">10</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span>
 <span id="cb142-4"><a href="analysing-data.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axistetra</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">1.8</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-65"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-65-1.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-65-2.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%" />
+<div class="figure"><span id="fig:unnamed-chunk-66"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-66-1.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-66-2.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%" />
 <p class="caption">
 Figure 3.10: Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit.
 </p>
 </div>
 <p>For tetrahedral models, another plotting option available is <code>projplot</code>, which projects colour points in the surface of a sphere encompassing the tetrahedron. This plot is particularly useful to see differences in hue.</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="analysing-data.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">projplot</span>(tetra.flowers, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-66"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-66-1.png" alt="Projection plot from a tetrahedral colour space." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-67"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-67-1.png" alt="Projection plot from a tetrahedral colour space." width="480" />
 <p class="caption">
 Figure 3.11: Projection plot from a tetrahedral colour space.
 </p>
@@ -833,7 +833,7 @@ Figure 3.11: Projection plot from a tetrahedral colour space.
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="analysing-data.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">voloverlap</span>(tcs.sicalis.T, tcs.sicalis.C, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##           vol1         vol2 overlapvol vsmallest vboth
 ## 1 5.183721e-06 4.739152e-06          0         0     0</code></pre>
-<p><img src="colsci-book_files/figure-html/unnamed-chunk-68-1.png" width="40%" /><img src="colsci-book_files/figure-html/unnamed-chunk-68-2.png" width="40%" /></p>
+<p><img src="colsci-book_files/figure-html/unnamed-chunk-69-1.png" width="40%" /><img src="colsci-book_files/figure-html/unnamed-chunk-69-2.png" width="40%" /></p>
 <p>The function <code>voloverlap()</code> gives the volume (<span class="math inline">\(V\)</span>) of the convex hull delimited by the overlap between the two original volumes, and two proportions are calculated from that: <span class="math display">\[\text{vsmallest} = V_{overlap} / \min(V_A, V_B)\]</span> and <span class="math display">\[\text{vboth} = V_{overlap} / (V_A + V_B)\]</span>. Thus, if one of the volumes is entirely contained in the other, <code>vsmallest</code> will equal 1.</p>
 <p>So we can clearly see that there is overlap between the throat and breast colours (of about 6%), but not between the throat and the crown colours (Figures above).</p>
 <p><strong>Summary variables for groups of points</strong></p>
@@ -883,8 +883,8 @@ Figure 3.11: Projection plot from a tetrahedral colour space.
 ## Faradaya_splendida     70.02119 0.3667853       70  bluegreen 0.3351008</code></pre>
 <p>Again, the output includes the photoreceptor excitation values for short- medium- and long-wave sensitive photoreceptors, x and y coordinates, and measures of hue and saturation for each stimulus. The hexagon model also outputs two additional measures of of subjective ‘bee-hue’; <code>sec.fine</code> and <code>sec.coarse</code>. <code>sec.fine</code> describes the location of stimuli within one of 36 ‘hue sectors’ that are specified by radially dissecting the hexagon in 10-degree increments. <code>sec.coarse</code> follows a similar principle, though here the hexagon is divided into only five ‘bee-hue’ sectors: UV, UV-blue, blue, blue-green, green, and UV-green. These can easily be visualised by specifying <code>sectors = 'coarse</code> or <code>sectors = 'fine'</code> in a call to <code>plot</code> after modelling.</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="analysing-data.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hex.flowers, <span class="at">sectors =</span> <span class="st">&#39;coarse&#39;</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-72"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-72-1.png" alt="Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-73"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-73-1.png" alt="Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors." width="480" />
 <p class="caption">
 Figure 3.12: Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors.
 </p>
@@ -917,8 +917,8 @@ Figure 3.12: Flowers as modelled in the hymenopteran colour hexagon of Chittka (
 ## Faradaya_splendida     3.922638  NA</code></pre>
 <p>The A and B coordinates are designated x and y in the output of coc for consistency, and while the model includes a measure of saturation in <code>r.vec</code>, it contains no associated measure of hue.</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="analysing-data.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coc.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers), <span class="at">yaxt =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-74"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-74-1.png" alt="Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-75"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-75-1.png" alt="Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee." width="480" />
 <p class="caption">
 Figure 3.13: Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee.
 </p>
@@ -956,8 +956,8 @@ Figure 3.13: Flowers in the colour-opponent-coding space of Backhaus (1991), as 
 ## Faradaya_splendida    0.18075745</code></pre>
 <p>The output is simply the tristimulus values and chromaticity coordinates of stimuli, and we can visualise our results (along with a line connecting monochromatic loci, by default) by calling</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="analysing-data.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ciexyz.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-77"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-77-1.png" alt="Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-78"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-78-1.png" alt="Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location." width="480" />
 <p class="caption">
 Figure 3.14: Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location.
 </p>
@@ -1001,8 +1001,8 @@ x^\frac{1}{3} &amp; \text{if } x &gt; 0.008856 \\
 ## Faradaya_splendida     45.351679</code></pre>
 <p>Our output now contains the tristimulus <code>XYZ</code> values, as well as their <code>Lab</code> counterparts, which are coordinates in the <code>Lab</code> space. These can also be visualised in three-dimensional <code>Lab</code> space by calling <code>plot</code>:</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="analysing-data.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cielab.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-79"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-79-1.png" alt="Floral reflectance spectra represented in the CIELab model of human colour sensation." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-80"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-80-1.png" alt="Floral reflectance spectra represented in the CIELab model of human colour sensation." width="480" />
 <p class="caption">
 Figure 3.15: Floral reflectance spectra represented in the CIELab model of human colour sensation.
 </p>
@@ -1035,8 +1035,8 @@ Figure 3.15: Floral reflectance spectra represented in the CIELab model of human
 ## Faradaya_splendida    -0.4673097     p-y- 0.5431971 -2.105745  NA</code></pre>
 <p>And it is simply the signs of these differences that define the four possible fly-colour categories (p+y+, p-y+, p+y-, p-y-), which we can see in the associated plot.</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="analysing-data.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cat.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-82"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-82-1.png" alt="Flowers in the categorical colourspace of Troje (1993)." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-83"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-83-1.png" alt="Flowers in the categorical colourspace of Troje (1993)." width="480" />
 <p class="caption">
 Figure 3.16: Flowers in the categorical colourspace of Troje (1993).
 </p>
@@ -1094,8 +1094,8 @@ Note that, while a segment analysis ranging from 300 or 400 nm to 700 nm corresp
 <span id="cb183-4"><a href="analysing-data.html#cb183-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb183-5"><a href="analysing-data.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot results</span></span>
 <span id="cb183-6"><a href="analysing-data.html#cb183-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seg.fdc, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakedata.c))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-83"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-83-1.png" alt="Idealized reflectance spectra and their projection on the axes of segment classification" width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-84"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-84-1.png" alt="Idealized reflectance spectra and their projection on the axes of segment classification" width="384" />
 <p class="caption">
 Figure 3.17: Idealized reflectance spectra and their projection on the axes of segment classification
 </p>
@@ -1144,8 +1144,8 @@ Figure 3.17: Idealized reflectance spectra and their projection on the axes of s
 <span id="cb192-6"><a href="analysing-data.html#cb192-6" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp.colours[, <span class="st">&quot;wl&quot;</span>] <span class="ot">&lt;-</span> fakemantisshrimp[, <span class="st">&quot;wl&quot;</span>]</span>
 <span id="cb192-7"><a href="analysing-data.html#cb192-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb192-8"><a href="analysing-data.html#cb192-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fakemantisshrimp, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakemantisshrimp.colours), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Absorbance&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-86"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-86-1.png" alt="Visual system of a pretend mantis shrimp with 10 cones" width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-87"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-87-1.png" alt="Visual system of a pretend mantis shrimp with 10 cones" width="384" />
 <p class="caption">
 Figure 3.18: Visual system of a pretend mantis shrimp with 10 cones
 </p>
@@ -1183,8 +1183,8 @@ Figure 3.18: Visual system of a pretend mantis shrimp with 10 cones
 <span id="cb201-2"><a href="analysing-data.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specifying individual images, and they would progress automatically</span></span>
 <span id="cb201-3"><a href="analysing-data.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with user input.</span></span>
 <span id="cb201-4"><a href="analysing-data.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(butterflies_class[[<span class="dv">2</span>]], <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-89"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-89-1.png" alt="The k-means classified images of our butterflies, along with their identified colour palettes" width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-90"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-90-1.png" alt="The k-means classified images of our butterflies, along with their identified colour palettes" width="480" />
 <p class="caption">
 Figure 3.19: The k-means classified images of our butterflies, along with their identified colour palettes
 </p>
@@ -1303,8 +1303,8 @@ Figure 3.19: The k-means classified images of our butterflies, along with their 
 <span id="cb221-6"><a href="analysing-data.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="co"># though the sampling density is something to be closely considered on a case-by-case basis</span></span>
 <span id="cb221-7"><a href="analysing-data.html#cb221-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lizard)</span>
 <span id="cb221-8"><a href="analysing-data.html#cb221-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">expand.grid</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>), <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>)), <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-94"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-94-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="45%" />
+<div class="figure"><span id="fig:unnamed-chunk-95"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-95-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="45%" />
 <p class="caption">
 Figure 3.20: A cryptic lizard, along with a possible sampling grid for spectral measurement.
 </p>

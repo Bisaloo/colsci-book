@@ -559,15 +559,21 @@ Figure 2.5: Plots showing original reflectance curve including negative values (
 <li><strong>Heatmap</strong>: false colour map to illustrate three dimensional data</li>
 </ol>
 <p>These options are in addition to the exploratory plotting offered by <code>explorespec()</code>, as seen in the figures in section 1. To showcase the capabilities of <code>plot.rspec()</code>, we will use the <code>teal</code> dataset included in <code>pavo</code>. This dataset consists of reflectance spectra from the iridescent wing patch of a green-winged teal (<em>Anas carolinensis</em>). Reflectance measurements were taken between 300 and 700 nm at different incident angles, ranging from 15° to 70° (in 5° increments) <span class="citation">(<a href="#ref-Eliason2012" role="doc-biblioref">Eliason and Shawkey 2012</a>)</span>.</p>
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="fig/anas-carolinensis.jpg" alt="Anas carolinensis, by pixabay user Cock-Robin, CC0"  />
+<p class="caption">
+Figure 2.6: Anas carolinensis, by pixabay user Cock-Robin, CC0
+</p>
+</div>
 <div id="the-overlay-option" class="section level4" number="2.3.1.1">
 <h4><span class="header-section-number">2.3.1.1</span> The <code>overlay</code> Option</h4>
 <p>We can start out by visualizing these spectra with the <code>overlay</code> option in plot. Another neat option <code>pavo</code> offers is to convert reflectance spectra to their approximate perceived colour, by using the function <code>spec2rgb()</code>. This can make for some very interesting plots and even exploratory data analysis, as shown above.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="importing-processing-and-visualising-data.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(teal)</span>
 <span id="cb72-2"><a href="importing-processing-and-visualising-data.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teal, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">col =</span> <span class="fu">spec2rgb</span>(teal))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-25"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-25-1.png" alt="Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-26"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-26-1.png" alt="Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour." width="480" />
 <p class="caption">
-Figure 2.6: Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour.
+Figure 2.7: Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour.
 </p>
 </div>
 </div>
@@ -583,10 +589,10 @@ Figure 2.6: Overlay plot of the teal angle-dependent reflectance with colours of
 <span id="cb75-3"><a href="importing-processing-and-visualising-data.html#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-4"><a href="importing-processing-and-visualising-data.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Wavelength (nm)&quot;</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">outer =</span> T, <span class="at">line =</span> <span class="dv">1</span>)</span>
 <span id="cb75-5"><a href="importing-processing-and-visualising-data.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Cumulative reflectance (A.U.)&quot;</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">outer =</span> T, <span class="at">line =</span> <span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-26"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-26-1.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-26-2.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%" />
+<div class="figure"><span id="fig:unnamed-chunk-27"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-27-1.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-27-2.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%" />
 <p class="caption">
-Figure 2.7: Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance
+Figure 2.8: Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance
 </p>
 </div>
 <p>Note that in the above figure, the y axis to the right includes the index of each spectrum. This makes it easier to identify and subset specific spectra or groups of spectra using the <code>select</code> argument in <code>plot.rspec()</code>. Note also that the first index is actually 2, preserving the sequence in the original dataset (since the first column is wavelength). Though this may seem confusing at first (“why is my first spec number 2?”) this preserves subsetting hierarchy: using <code>plot(teal, select = 2)</code> will show the same spectra that would be selected if you use <code>teal[ ,2]</code>.</p>
@@ -606,10 +612,10 @@ Figure 2.7: Stacked plot of the raw (left) and normalized (right) teal angle-dep
 <span id="cb79-4"><a href="importing-processing-and-visualising-data.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;Incident angle (&quot;</span>, degree, <span class="st">&quot;)&quot;</span>)),</span>
 <span id="cb79-5"><a href="importing-processing-and-visualising-data.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">las =</span> <span class="dv">1</span>, <span class="at">useRaster =</span> <span class="cn">TRUE</span></span>
 <span id="cb79-6"><a href="importing-processing-and-visualising-data.html#cb79-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-28"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-28-1.png" alt="Heatmap plot for angle-resolved reflectance measurements of the green-winged teal." width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-29"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-29-1.png" alt="Heatmap plot for angle-resolved reflectance measurements of the green-winged teal." width="480" />
 <p class="caption">
-Figure 2.8: Heatmap plot for angle-resolved reflectance measurements of the green-winged teal.
+Figure 2.9: Heatmap plot for angle-resolved reflectance measurements of the green-winged teal.
 </p>
 </div>
 <p>These plots can be very useful to observe changes over time, for example, or any other type of continuous variation.</p>
@@ -629,10 +635,10 @@ Figure 2.8: Heatmap plot for angle-resolved reflectance measurements of the gree
 <span id="cb80-9"><a href="importing-processing-and-visualising-data.html#cb80-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">70</span>),</span>
 <span id="cb80-10"><a href="importing-processing-and-visualising-data.html#cb80-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">FUN.error =</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x)),</span>
 <span id="cb80-11"><a href="importing-processing-and-visualising-data.html#cb80-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">lcol =</span> <span class="dv">1</span>, <span class="at">shadecol =</span> <span class="st">&quot;grey&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-29"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-29-1.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-29-2.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%" />
+<div class="figure"><span id="fig:unnamed-chunk-30"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-30-1.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%" /><img src="colsci-book_files/figure-html/unnamed-chunk-30-2.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%" />
 <p class="caption">
-Figure 2.9: Example plots created using <code>aggplot</code>. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale
+Figure 2.10: Example plots created using <code>aggplot</code>. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale
 </p>
 </div>
 </div>
@@ -693,10 +699,10 @@ Figure 2.9: Example plots created using <code>aggplot</code>. Left: using median
 <p>Thanks to the underlying class system of <code>pavo</code>, the generic functions <code>plot</code> and <code>summary</code> recognise and respond to image-data in an appropriate manner, as is the case with spectral data. A quick call to <code>plot</code>, for example, prints our images. Note that while we call an image individually below (for convenient printing in the vignette), we could simply feed the entire list of images to <code>plot</code> and it would automatically step through each image in the list upon user input.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="importing-processing-and-visualising-data.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the plot titles are taken from the file names, and can be overridden.</span></span>
 <span id="cb93-2"><a href="importing-processing-and-visualising-data.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(butterflies[[<span class="dv">1</span>]])</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-33"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-33-1.png" alt="Raw images of our butterflies" width="384" />
+<div class="figure"><span id="fig:unnamed-chunk-34"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-34-1.png" alt="Raw images of our butterflies" width="384" />
 <p class="caption">
-Figure 2.10: Raw images of our butterflies
+Figure 2.11: Raw images of our butterflies
 </p>
 </div>
 <p>The <code>summary</code> function offers some summary information about images or lists of images as we might expect. If we specify <code>plot = TRUE</code> however, the function instead plots the image. When such images have been colour-classified this also plots the images’ colour palette alongside (see below). This is an extremely useful diagnostic tool when classifying images, as it allows us to see how well the classification algorithm has performed in clustering colour pattern elements into discrete colour categories. As with all plots, the function takes all standard plot arguments (see <code>?par</code>), such as custom colours, which again can be diagnostically useful.</p>
