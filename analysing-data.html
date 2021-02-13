@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-02-11" />
+<meta name="date" content="2021-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -905,12 +905,42 @@ Figure 3.11: Projection plot from a tetrahedral colour space.
 ## all.points 0.05706825 0.001682224 0.6413439 0.3157949 0.2428508 0.8285792
 ##                   a.vol
 ## all.points 0.0001723672</code></pre>
+<p>It is important to highlight that oftentimes, the properties of the visual system will make it impossible to reach the entirety of the Maxwell triangle space (or tetrahedron for tetrachromatic viewers). You can view the maximum gamut of a given viewer by switching the <code>gamut</code> argument to <code>TRUE</code> in <code>plot.colspace()</code>:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="analysing-data.html#cb159-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&quot;ctenophorus&quot;</span>)</span>
+<span id="cb159-2"><a href="analysing-data.html#cb159-2" aria-hidden="true" tabindex="-1"></a>tri.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers)</span>
+<span id="cb159-3"><a href="analysing-data.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tri.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers), <span class="at">gamut =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="colsci-book_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p>This information is also available in the summary, in the “Max possible chromatic volume” line:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="analysing-data.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tri.flowers)</span></code></pre></div>
+<pre><code>## Colorspace &amp; visual model options:
+##  * Colorspace: trispace 
+##  * Quantal catch: Qi 
+##  * Visual system, chromatic: ctenophorus 
+##  * Visual system, achromatic: none 
+##  * Illuminant: ideal, scale = 1 (von Kries colour correction not applied) 
+##  * Background: ideal 
+##  * Relative: TRUE 
+##  * Max possible chromatic volume: 0.4729301</code></pre>
+<pre><code>##        s                 m                l                x           
+##  Min.   :0.02084   Min.   :0.2318   Min.   :0.2066   Min.   :-0.09877  
+##  1st Qu.:0.18617   1st Qu.:0.3005   1st Qu.:0.3806   1st Qu.: 0.02242  
+##  Median :0.23206   Median :0.3452   Median :0.4180   Median : 0.05899  
+##  Mean   :0.23206   Mean   :0.3225   Mean   :0.4454   Mean   : 0.08689  
+##  3rd Qu.:0.29330   3rd Qu.:0.3513   3rd Qu.:0.5039   3rd Qu.: 0.12564  
+##  Max.   :0.44720   Max.   :0.3660   Max.   :0.7474   Max.   : 0.36460  
+##        y               h.theta            r.vec           lum         
+##  Min.   :-0.38273   Min.   :-1.9491   Min.   :0.02264   Mode:logical  
+##  1st Qu.:-0.18023   1st Qu.:-1.2269   1st Qu.:0.08330   NA&#39;s:36       
+##  Median :-0.12404   Median :-0.9590   Median :0.13917                 
+##  Mean   :-0.12404   Mean   :-0.5767   Mean   :0.17858                 
+##  3rd Qu.:-0.04903   3rd Qu.:-0.7747   3rd Qu.:0.24002                 
+##  Max.   : 0.13946   Max.   : 2.6273   Max.   :0.52860</code></pre>
 </div>
 <div id="the-colour-hexagon" class="section level5" number="3.1.4.6.2">
 <h5><span class="header-section-number">3.1.4.6.2</span> The Colour Hexagon</h5>
 <p>The hexagon colour space of <span class="citation"><a href="#ref-Chittka1992" role="doc-biblioref">Chittka</a> (<a href="#ref-Chittka1992" role="doc-biblioref">1992</a>)</span> is a generalised colour-opponent model of hymenopteran vision that has found extremely broad use, particularly in studies of bee-flower interactions. It’s also often broadly applied across hymenopteran species, because the photopigments underlying trichromatic vision in Hymenoptera appear to be quite conserved <span class="citation">(<a href="#ref-Briscoe2001" role="doc-biblioref">Briscoe and Chittka 2001</a>)</span>. What’s particularly useful is that colour distances within the hexagon have been extensively validated against behaviour, and thus offer a relatively reliable measure of perceptual distance.</p>
 <p>In the hexagon, photoreceptor quantum catches are typically hyperbolically transformed (and <code>pavo</code> will return a warning if the transform is not selected), and vonkries correction is often used used to model photoreceptor adaptation to a vegetation background. This can all now be specified in <code>vismodel()</code>. including the optional use of a ‘green’ vegetation background. Note that although this is a colourspace model, we specific <code>relative = FALSE</code> to return unnormalised quantum catches, as required for the model.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="analysing-data.html#cb159-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&#39;apis&#39;</span>, <span class="at">qcatch =</span> <span class="st">&#39;Ei&#39;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">achromatic =</span> <span class="st">&#39;l&#39;</span>, <span class="at">bkg =</span> <span class="st">&#39;green&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="analysing-data.html#cb163-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&#39;apis&#39;</span>, <span class="at">qcatch =</span> <span class="st">&#39;Ei&#39;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">achromatic =</span> <span class="st">&#39;l&#39;</span>, <span class="at">bkg =</span> <span class="st">&#39;green&#39;</span>)</span></code></pre></div>
 <p>We can then apply the hexagon model in <code>colspace</code>, which will convert our photoreceptor ‘excitation values’ to coordinates in the hexagon according to:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -918,9 +948,9 @@ x &amp;= \frac{\sqrt{3}}{2(E_g + E_{uv})}\\
 y &amp;= E_b - 0.5(E_{uv} + E_g)
 \end{split}
 \]</span></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="analysing-data.html#cb160-1" aria-hidden="true" tabindex="-1"></a>hex.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;hexagon&#39;</span>)</span>
-<span id="cb160-2"><a href="analysing-data.html#cb160-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb160-3"><a href="analysing-data.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hex.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="analysing-data.html#cb164-1" aria-hidden="true" tabindex="-1"></a>hex.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;hexagon&#39;</span>)</span>
+<span id="cb164-2"><a href="analysing-data.html#cb164-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-3"><a href="analysing-data.html#cb164-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hex.flowers)</span></code></pre></div>
 <pre><code>##                                s         m         l         x          y
 ## Goodenia_heterophylla 0.56572097 0.8237141 0.7053057 0.1208839  0.1882007
 ## Goodenia_geniculata   0.35761236 0.8176153 0.8670134 0.4411542  0.2053024
@@ -936,9 +966,9 @@ y &amp;= E_b - 0.5(E_{uv} + E_g)
 ## Eucalyptus_sp          54.57024 0.2812005       50  bluegreen 0.2787543
 ## Faradaya_splendida     70.02119 0.3667853       70  bluegreen 0.3351008</code></pre>
 <p>Again, the output includes the photoreceptor excitation values for short- medium- and long-wave sensitive photoreceptors, x and y coordinates, and measures of hue and saturation for each stimulus. The hexagon model also outputs two additional measures of of subjective ‘bee-hue’; <code>sec.fine</code> and <code>sec.coarse</code>. <code>sec.fine</code> describes the location of stimuli within one of 36 ‘hue sectors’ that are specified by radially dissecting the hexagon in 10-degree increments. <code>sec.coarse</code> follows a similar principle, though here the hexagon is divided into only five ‘bee-hue’ sectors: UV, UV-blue, blue, blue-green, green, and UV-green. These can easily be visualised by specifying <code>sectors = 'coarse</code> or <code>sectors = 'fine'</code> in a call to <code>plot</code> after modelling.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="analysing-data.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hex.flowers, <span class="at">sectors =</span> <span class="st">&#39;coarse&#39;</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-73"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-73-1.png" alt="Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors." width="480" />
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="analysing-data.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hex.flowers, <span class="at">sectors =</span> <span class="st">&#39;coarse&#39;</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-75"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-75-1.png" alt="Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors." width="480" />
 <p class="caption">
 Figure 3.12: Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors.
 </p>
@@ -954,11 +984,11 @@ B &amp;= -5.17E_u + 20.25E_b - 15.08E_g
 \end{split}
 \]</span></p>
 <p>Where <span class="math inline">\(E_i\)</span> is the excitation value (hyperbolic-transformed quantum catch) in photoreceptor <span class="math inline">\(i\)</span>.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="analysing-data.html#cb163-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&quot;apis&quot;</span>, <span class="at">qcatch =</span> <span class="st">&quot;Ei&quot;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">bkg =</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb163-2"><a href="analysing-data.html#cb163-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-3"><a href="analysing-data.html#cb163-3" aria-hidden="true" tabindex="-1"></a>coc.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&quot;coc&quot;</span>)</span>
-<span id="cb163-4"><a href="analysing-data.html#cb163-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-5"><a href="analysing-data.html#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coc.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="analysing-data.html#cb167-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&quot;apis&quot;</span>, <span class="at">qcatch =</span> <span class="st">&quot;Ei&quot;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">bkg =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb167-2"><a href="analysing-data.html#cb167-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-3"><a href="analysing-data.html#cb167-3" aria-hidden="true" tabindex="-1"></a>coc.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&quot;coc&quot;</span>)</span>
+<span id="cb167-4"><a href="analysing-data.html#cb167-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-5"><a href="analysing-data.html#cb167-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coc.flowers)</span></code></pre></div>
 <pre><code>##                                s         m         l        x          y
 ## Goodenia_heterophylla 0.56572097 0.8237141 0.7053057 2.288050  3.1194224
 ## Goodenia_geniculata   0.35761236 0.8176153 0.8670134 4.642329  1.6332926
@@ -974,9 +1004,9 @@ B &amp;= -5.17E_u + 20.25E_b - 15.08E_g
 ## Eucalyptus_sp          4.835346  NA
 ## Faradaya_splendida     3.922638  NA</code></pre>
 <p>The A and B coordinates are designated x and y in the output of coc for consistency, and while the model includes a measure of saturation in <code>r.vec</code>, it contains no associated measure of hue.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="analysing-data.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coc.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers), <span class="at">yaxt =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-75"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-75-1.png" alt="Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee." width="480" />
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="analysing-data.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coc.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers), <span class="at">yaxt =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-77"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-77-1.png" alt="Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee." width="480" />
 <p class="caption">
 Figure 3.13: Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee.
 </p>
@@ -1003,9 +1033,9 @@ z &amp;= \frac{Z}{X + Y + Z} = 1 - x - y
 \end{split}
 \]</span></p>
 <p>For modelling in both XYZ and LAB spaces, here we’ll use the CIE 10-degree standard observer, and assume a <code>D65</code> ‘standard daylight’ illuminant. Again, although they are colourspace models, we need to set <code>relative = FALSE</code> to return raw quantum catch estimates, <code>vonkries = TRUE</code> to account for the required normalising factor (as above), and <code>achromatic = 'none'</code> since there is no applicable way to estimate luminance in the CIE models. As with all models that have particular requirements, <code>vismodel()</code> will output warnings and/or errors if unusual or non-standard arguments are specified.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="analysing-data.html#cb166-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&#39;cie10&#39;</span>, <span class="at">illum =</span> <span class="st">&#39;D65&#39;</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="analysing-data.html#cb167-1" aria-hidden="true" tabindex="-1"></a>ciexyz.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;ciexyz&#39;</span>)</span>
-<span id="cb167-2"><a href="analysing-data.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ciexyz.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="analysing-data.html#cb170-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&#39;cie10&#39;</span>, <span class="at">illum =</span> <span class="st">&#39;D65&#39;</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="analysing-data.html#cb171-1" aria-hidden="true" tabindex="-1"></a>ciexyz.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;ciexyz&#39;</span>)</span>
+<span id="cb171-2"><a href="analysing-data.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ciexyz.flowers)</span></code></pre></div>
 <pre><code>##                               X         Y          Z         x         y
 ## Goodenia_heterophylla 0.2095846 0.2074402 0.30060475 0.2920513 0.2890630
 ## Goodenia_geniculata   0.6415362 0.6751982 0.42423209 0.3684943 0.3878295
@@ -1021,9 +1051,9 @@ z &amp;= \frac{Z}{X + Y + Z} = 1 - x - y
 ## Eucalyptus_sp         0.31122295
 ## Faradaya_splendida    0.18075745</code></pre>
 <p>The output is simply the tristimulus values and chromaticity coordinates of stimuli, and we can visualise our results (along with a line connecting monochromatic loci, by default) by calling</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="analysing-data.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ciexyz.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-78"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-78-1.png" alt="Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location." width="480" />
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="analysing-data.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ciexyz.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-80"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-80-1.png" alt="Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location." width="480" />
 <p class="caption">
 Figure 3.14: Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location.
 </p>
@@ -1059,8 +1089,8 @@ Z_n &amp;= \int_{300}^{700}{R_n(\lambda)I(\lambda)\bar{z}(\lambda)\,d\lambda}
 \end{split}
 \]</span></p>
 <p>when <span class="math inline">\(R_n(\lambda)\)</span> is a perfect diffuse reflector (i.e. 1).</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="analysing-data.html#cb170-1" aria-hidden="true" tabindex="-1"></a>cielab.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;cielab&#39;</span>)</span>
-<span id="cb170-2"><a href="analysing-data.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cielab.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="analysing-data.html#cb174-1" aria-hidden="true" tabindex="-1"></a>cielab.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;cielab&#39;</span>)</span>
+<span id="cb174-2"><a href="analysing-data.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cielab.flowers)</span></code></pre></div>
 <pre><code>##                               X         Y          Z        L         a
 ## Goodenia_heterophylla 0.2095846 0.2074402 0.30060475 16.75107  3.110872
 ## Goodenia_geniculata   0.6415362 0.6751982 0.42423209 54.52316 -4.478971
@@ -1076,9 +1106,9 @@ Z_n &amp;= \int_{300}^{700}{R_n(\lambda)I(\lambda)\bar{z}(\lambda)\,d\lambda}
 ## Eucalyptus_sp          -1.246816
 ## Faradaya_splendida     45.351679</code></pre>
 <p>Our output now contains the tristimulus <code>XYZ</code> values, as well as their <code>Lab</code> counterparts, which are coordinates in the <code>Lab</code> space. These can also be visualised in three-dimensional <code>Lab</code> space by calling <code>plot</code>:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="analysing-data.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cielab.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-80"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-80-1.png" alt="Floral reflectance spectra represented in the CIELab model of human colour sensation." width="480" />
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="analysing-data.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cielab.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-82"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-82-1.png" alt="Floral reflectance spectra represented in the CIELab model of human colour sensation." width="480" />
 <p class="caption">
 Figure 3.15: Floral reflectance spectra represented in the CIELab model of human colour sensation.
 </p>
@@ -1088,7 +1118,7 @@ Figure 3.15: Floral reflectance spectra represented in the CIELab model of human
 <h5><span class="header-section-number">3.1.4.6.5</span> Categorical Fly Colourspace</h5>
 <p>The categorical colour vision model of <span class="citation"><a href="#ref-Troje1993" role="doc-biblioref">Troje</a> (<a href="#ref-Troje1993" role="doc-biblioref">1993</a>)</span> is a model of dipteran vision, based on behavioural data from the blowfly <em>Lucilia</em> sp. It assumes the involvement of all four dipteran photoreceptor classes (R7 &amp; R8 ‘pale’ and ‘yellow’ subtypes), and further posits that colour vision is based on two specific opponent mechanisms (R7p - R8p, and R7y - R8y). The model assumes that all colours are perceptually grouped into one of four colour categories, and that flies are unable to distinguish between colours that fall within the same category.</p>
 <p>We’ll use the visual systems of the muscoid fly <em>Musca domestica</em>, and will begin by estimating linear (i.e. untransformed) quantum catches for each of the four photoreceptors.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="analysing-data.html#cb173-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">qcatch =</span> <span class="st">&#39;Qi&#39;</span>, <span class="at">visual =</span> <span class="st">&#39;musca&#39;</span>, <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>, <span class="at">relative =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="analysing-data.html#cb177-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">qcatch =</span> <span class="st">&#39;Qi&#39;</span>, <span class="at">visual =</span> <span class="st">&#39;musca&#39;</span>, <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>, <span class="at">relative =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Our call to <code>colspace()</code> will then simply estimate the location of stimuli in the categorical space as the difference in relative stimulation between ‘pale’ (R7p - R8p) and ‘yellow’ (R7y - R8y) photoreceptor pairs:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -1096,9 +1126,9 @@ x &amp;= R7_p - R8_p\\
 y &amp;= R7_y - R8_y
 \end{split}
 \]</span></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="analysing-data.html#cb174-1" aria-hidden="true" tabindex="-1"></a>cat.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;categorical&#39;</span>)</span>
-<span id="cb174-2"><a href="analysing-data.html#cb174-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb174-3"><a href="analysing-data.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cat.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="analysing-data.html#cb178-1" aria-hidden="true" tabindex="-1"></a>cat.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&#39;categorical&#39;</span>)</span>
+<span id="cb178-2"><a href="analysing-data.html#cb178-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="analysing-data.html#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cat.flowers)</span></code></pre></div>
 <pre><code>##                              R7p        R7y       R8p       R8y          x
 ## Goodenia_heterophylla 0.05387616 0.18710662 0.4335986 0.3254187 -0.3797224
 ## Goodenia_geniculata   0.02080098 0.08276030 0.3737592 0.5226795 -0.3529583
@@ -1114,9 +1144,9 @@ y &amp;= R7_y - R8_y
 ## Eucalyptus_sp         -0.2835027     p-y- 0.4606695 -2.478681  NA
 ## Faradaya_splendida    -0.4673097     p-y- 0.5431971 -2.105745  NA</code></pre>
 <p>And it is simply the signs of these differences that define the four possible fly-colour categories (p+y+, p-y+, p+y-, p-y-), which we can see in the associated plot.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="analysing-data.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cat.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-83"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-83-1.png" alt="Flowers in the categorical colourspace of Troje (1993)." width="480" />
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="analysing-data.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cat.flowers, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="fu">spec2rgb</span>(flowers))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-85"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-85-1.png" alt="Flowers in the categorical colourspace of Troje (1993)." width="480" />
 <p class="caption">
 Figure 3.16: Flowers in the categorical colourspace of Troje (1993).
 </p>
@@ -1136,50 +1166,50 @@ MS &amp;= \frac{ R_\lambda \sum_{\lambda={Q3}} R_\lambda - \sum_{\lambda={Q1}} R
 \]</span></p>
 <p>Where <span class="math inline">\(Qi\)</span> represent the interquantile distances (e.g. <span class="math inline">\(Q1=ultraviolet\)</span>, <span class="math inline">\(Q2=blue\)</span>, <span class="math inline">\(Q3=green\)</span> and <span class="math inline">\(Q4=red\)</span>)</p>
 <p>The segment classification model is obtained through the <code>colspace()</code> argument <code>space = 'segment'</code>, following initial modelling with <code>vismodel()</code>. The example below uses idealized reflectance spectra to illustrate how the avian colour space defined from the segment classification maps to the human colour wheel:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="analysing-data.html#cb177-1" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
-<span id="cb177-2"><a href="analysing-data.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">500</span>, <span class="at">by =</span> <span class="dv">20</span>),</span>
-<span id="cb177-3"><a href="analysing-data.html#cb177-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">rowSums</span>(<span class="fu">cbind</span>(</span>
-<span id="cb177-4"><a href="analysing-data.html#cb177-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, x, <span class="dv">30</span>),</span>
-<span id="cb177-5"><a href="analysing-data.html#cb177-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, x <span class="sc">+</span> <span class="dv">400</span>, <span class="dv">30</span>)</span>
-<span id="cb177-6"><a href="analysing-data.html#cb177-6" aria-hidden="true" tabindex="-1"></a>    )), <span class="fu">numeric</span>(<span class="dv">401</span>)</span>
-<span id="cb177-7"><a href="analysing-data.html#cb177-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb177-8"><a href="analysing-data.html#cb177-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-9"><a href="analysing-data.html#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="co"># creating idealized specs with varying saturation</span></span>
-<span id="cb177-10"><a href="analysing-data.html#cb177-10" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
-<span id="cb177-11"><a href="analysing-data.html#cb177-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">150</span>, <span class="dv">105</span>, <span class="dv">75</span>, <span class="dv">55</span>, <span class="dv">40</span>, <span class="dv">30</span>),</span>
-<span id="cb177-12"><a href="analysing-data.html#cb177-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="dv">550</span>, x),</span>
-<span id="cb177-13"><a href="analysing-data.html#cb177-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numeric</span>(<span class="dv">401</span>)</span>
-<span id="cb177-14"><a href="analysing-data.html#cb177-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb177-15"><a href="analysing-data.html#cb177-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-16"><a href="analysing-data.html#cb177-16" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata1))</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="analysing-data.html#cb181-1" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
+<span id="cb181-2"><a href="analysing-data.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">500</span>, <span class="at">by =</span> <span class="dv">20</span>),</span>
+<span id="cb181-3"><a href="analysing-data.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">rowSums</span>(<span class="fu">cbind</span>(</span>
+<span id="cb181-4"><a href="analysing-data.html#cb181-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, x, <span class="dv">30</span>),</span>
+<span id="cb181-5"><a href="analysing-data.html#cb181-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, x <span class="sc">+</span> <span class="dv">400</span>, <span class="dv">30</span>)</span>
+<span id="cb181-6"><a href="analysing-data.html#cb181-6" aria-hidden="true" tabindex="-1"></a>    )), <span class="fu">numeric</span>(<span class="dv">401</span>)</span>
+<span id="cb181-7"><a href="analysing-data.html#cb181-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb181-8"><a href="analysing-data.html#cb181-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-9"><a href="analysing-data.html#cb181-9" aria-hidden="true" tabindex="-1"></a><span class="co"># creating idealized specs with varying saturation</span></span>
+<span id="cb181-10"><a href="analysing-data.html#cb181-10" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
+<span id="cb181-11"><a href="analysing-data.html#cb181-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">150</span>, <span class="dv">105</span>, <span class="dv">75</span>, <span class="dv">55</span>, <span class="dv">40</span>, <span class="dv">30</span>),</span>
+<span id="cb181-12"><a href="analysing-data.html#cb181-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="dv">550</span>, x),</span>
+<span id="cb181-13"><a href="analysing-data.html#cb181-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numeric</span>(<span class="dv">401</span>)</span>
+<span id="cb181-14"><a href="analysing-data.html#cb181-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb181-15"><a href="analysing-data.html#cb181-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-16"><a href="analysing-data.html#cb181-16" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata1))</span></code></pre></div>
 <pre><code>## wavelengths found in column 1</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="analysing-data.html#cb179-1" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata1, <span class="st">&quot;max&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="analysing-data.html#cb183-1" aria-hidden="true" tabindex="-1"></a>fakedata1 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata1, <span class="st">&quot;max&quot;</span>)</span></code></pre></div>
 <pre><code>## processing options applied:
 ## Scaling spectra to a maximum value of 1</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="analysing-data.html#cb181-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata2))</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="analysing-data.html#cb185-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata2))</span></code></pre></div>
 <pre><code>## wavelengths found in column 1</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="analysing-data.html#cb183-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata2, <span class="st">&quot;sum&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="analysing-data.html#cb187-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata2, <span class="st">&quot;sum&quot;</span>)</span></code></pre></div>
 <pre><code>## processing options applied:
 ## Scaling spectra to a total area of 1</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="analysing-data.html#cb185-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata2, <span class="st">&quot;min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="analysing-data.html#cb189-1" aria-hidden="true" tabindex="-1"></a>fakedata2 <span class="ot">&lt;-</span> <span class="fu">procspec</span>(fakedata2, <span class="st">&quot;min&quot;</span>)</span></code></pre></div>
 <pre><code>## processing options applied:
 ## Scaling spectra to a minimum value of zero</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="analysing-data.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="co"># converting reflectance to percentage</span></span>
-<span id="cb187-2"><a href="analysing-data.html#cb187-2" aria-hidden="true" tabindex="-1"></a>fakedata1[, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> fakedata1[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb187-3"><a href="analysing-data.html#cb187-3" aria-hidden="true" tabindex="-1"></a>fakedata2[, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> fakedata2[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">/</span> <span class="fu">max</span>(fakedata2[, <span class="sc">-</span><span class="dv">1</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb187-4"><a href="analysing-data.html#cb187-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb187-5"><a href="analysing-data.html#cb187-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combining and converting to rspec</span></span>
-<span id="cb187-6"><a href="analysing-data.html#cb187-6" aria-hidden="true" tabindex="-1"></a>fakedata.c <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata1[, <span class="sc">-</span><span class="dv">1</span>], fakedata2[, <span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb187-7"><a href="analysing-data.html#cb187-7" aria-hidden="true" tabindex="-1"></a>fakedata.c <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(fakedata.c)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="analysing-data.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="co"># converting reflectance to percentage</span></span>
+<span id="cb191-2"><a href="analysing-data.html#cb191-2" aria-hidden="true" tabindex="-1"></a>fakedata1[, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> fakedata1[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb191-3"><a href="analysing-data.html#cb191-3" aria-hidden="true" tabindex="-1"></a>fakedata2[, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> fakedata2[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">/</span> <span class="fu">max</span>(fakedata2[, <span class="sc">-</span><span class="dv">1</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb191-4"><a href="analysing-data.html#cb191-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-5"><a href="analysing-data.html#cb191-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combining and converting to rspec</span></span>
+<span id="cb191-6"><a href="analysing-data.html#cb191-6" aria-hidden="true" tabindex="-1"></a>fakedata.c <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakedata1[, <span class="sc">-</span><span class="dv">1</span>], fakedata2[, <span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb191-7"><a href="analysing-data.html#cb191-7" aria-hidden="true" tabindex="-1"></a>fakedata.c <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(fakedata.c)</span></code></pre></div>
 <pre><code>## wavelengths found in column 1</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="analysing-data.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="co"># segment classification analysis</span></span>
-<span id="cb189-2"><a href="analysing-data.html#cb189-2" aria-hidden="true" tabindex="-1"></a>seg.vis <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(fakedata.c, <span class="at">visual =</span> <span class="st">&quot;segment&quot;</span>, <span class="at">achromatic =</span> <span class="st">&quot;all&quot;</span>)</span>
-<span id="cb189-3"><a href="analysing-data.html#cb189-3" aria-hidden="true" tabindex="-1"></a>seg.fdc <span class="ot">&lt;-</span> <span class="fu">colspace</span>(seg.vis, <span class="at">space =</span> <span class="st">&quot;segment&quot;</span>)</span>
-<span id="cb189-4"><a href="analysing-data.html#cb189-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb189-5"><a href="analysing-data.html#cb189-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot results</span></span>
-<span id="cb189-6"><a href="analysing-data.html#cb189-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seg.fdc, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakedata.c))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-84"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-84-1.png" alt="Idealized reflectance spectra and their projection on the axes of segment classification" width="384" />
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="analysing-data.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="co"># segment classification analysis</span></span>
+<span id="cb193-2"><a href="analysing-data.html#cb193-2" aria-hidden="true" tabindex="-1"></a>seg.vis <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(fakedata.c, <span class="at">visual =</span> <span class="st">&quot;segment&quot;</span>, <span class="at">achromatic =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb193-3"><a href="analysing-data.html#cb193-3" aria-hidden="true" tabindex="-1"></a>seg.fdc <span class="ot">&lt;-</span> <span class="fu">colspace</span>(seg.vis, <span class="at">space =</span> <span class="st">&quot;segment&quot;</span>)</span>
+<span id="cb193-4"><a href="analysing-data.html#cb193-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-5"><a href="analysing-data.html#cb193-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot results</span></span>
+<span id="cb193-6"><a href="analysing-data.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seg.fdc, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakedata.c))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-86"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-86-1.png" alt="Idealized reflectance spectra and their projection on the axes of segment classification" width="384" />
 <p class="caption">
 Figure 3.17: Idealized reflectance spectra and their projection on the axes of segment classification
 </p>
@@ -1188,7 +1218,7 @@ Figure 3.17: Idealized reflectance spectra and their projection on the axes of s
 <div id="colourspace-distances-with-coldist" class="section level5" number="3.1.4.6.7">
 <h5><span class="header-section-number">3.1.4.6.7</span> Colourspace Distances with <code>coldist</code></h5>
 <p>Under the colour space framework, colour distances can be calculated simply as Euclidean distances of the relative cone stimulation data, either log-transformed or not, depending on how it was defined. However, these distances cannot be interpreted in terms of JNDs, since no receptor noise is incorporated in the model. Euclidean distances can be computed in <code>R</code> using the <code>coldist()</code> function on the <code>colspace()</code> output:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="analysing-data.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">coldist</span>(tetra.flowers))</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="analysing-data.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">coldist</span>(tetra.flowers))</span></code></pre></div>
 <pre><code>## Quantum catch are relative, distances may not be meaningfulFALSE</code></pre>
 <pre><code>## Calculating unweighted Euclidean distances</code></pre>
 <pre><code>##                  patch1              patch2         dS dL
@@ -1199,15 +1229,15 @@ Figure 3.17: Idealized reflectance spectra and their projection on the axes of s
 ## 5 Goodenia_heterophylla  Faradaya_splendida 0.05027645 NA
 ## 6 Goodenia_heterophylla  Gaultheria_hispida 0.03897671 NA</code></pre>
 <p>Specialised colourspace models such as the colour-hexagon, coc space, CIELab and CIELCh models have their own distance measures, which are returned be default when run through <code>coldist()</code>. Be sure to read the <code>?coldist</code> documentation, and the original publications, to understand what is being returned. As an example, if we run the results of colour-hexagon modelling through <code>coldist()</code>:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="analysing-data.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model flower colours according to a honeybee</span></span>
-<span id="cb194-2"><a href="analysing-data.html#cb194-2" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&quot;apis&quot;</span>, <span class="at">qcatch =</span> <span class="st">&quot;Ei&quot;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">achromatic =</span> <span class="st">&quot;l&quot;</span>, <span class="at">bkg =</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb194-3"><a href="analysing-data.html#cb194-3" aria-hidden="true" tabindex="-1"></a>hex.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&quot;hexagon&quot;</span>)</span>
-<span id="cb194-4"><a href="analysing-data.html#cb194-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-5"><a href="analysing-data.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate colour distances. No need to specify relative receptor densities, noise etc.,</span></span>
-<span id="cb194-6"><a href="analysing-data.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="co"># which only apply in the case of receptor-noise modelling</span></span>
-<span id="cb194-7"><a href="analysing-data.html#cb194-7" aria-hidden="true" tabindex="-1"></a>dist.flowers <span class="ot">&lt;-</span> <span class="fu">coldist</span>(hex.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="analysing-data.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model flower colours according to a honeybee</span></span>
+<span id="cb198-2"><a href="analysing-data.html#cb198-2" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> <span class="st">&quot;apis&quot;</span>, <span class="at">qcatch =</span> <span class="st">&quot;Ei&quot;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">vonkries =</span> <span class="cn">TRUE</span>, <span class="at">achromatic =</span> <span class="st">&quot;l&quot;</span>, <span class="at">bkg =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb198-3"><a href="analysing-data.html#cb198-3" aria-hidden="true" tabindex="-1"></a>hex.flowers <span class="ot">&lt;-</span> <span class="fu">colspace</span>(vis.flowers, <span class="at">space =</span> <span class="st">&quot;hexagon&quot;</span>)</span>
+<span id="cb198-4"><a href="analysing-data.html#cb198-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-5"><a href="analysing-data.html#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate colour distances. No need to specify relative receptor densities, noise etc.,</span></span>
+<span id="cb198-6"><a href="analysing-data.html#cb198-6" aria-hidden="true" tabindex="-1"></a><span class="co"># which only apply in the case of receptor-noise modelling</span></span>
+<span id="cb198-7"><a href="analysing-data.html#cb198-7" aria-hidden="true" tabindex="-1"></a>dist.flowers <span class="ot">&lt;-</span> <span class="fu">coldist</span>(hex.flowers)</span></code></pre></div>
 <pre><code>## Calculating unweighted Euclidean distances</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="analysing-data.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dist.flowers)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="analysing-data.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dist.flowers)</span></code></pre></div>
 <pre><code>##                  patch1              patch2        dS dL
 ## 1 Goodenia_heterophylla Goodenia_geniculata 0.3207265 NA
 ## 2 Goodenia_heterophylla   Goodenia_gracilis 0.6870945 NA
@@ -1220,26 +1250,26 @@ Figure 3.17: Idealized reflectance spectra and their projection on the axes of s
 <div id="distances-in-n-dimensions" class="section level5" number="3.1.4.6.8">
 <h5><span class="header-section-number">3.1.4.6.8</span> Distances in N-Dimensions</h5>
 <p>The <code>coldist()</code> function is no longer limited to di-, tri- or tetrachromatic visual systems. The function has been generalised, and can now calculate colour distances for n-dimensional visual phenotypes. This means there is no limit on the dimensionality of visual systems that may be input, which may prove useful for modelling nature’s extremes (e.g. butterflies, mantis shrimp) or for simulation-based work. Naturally, since these calculations aren’t largely implemented elsewhere, we recommend caution and validation of results prior to publication.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="analysing-data.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an arbitrary visual phenotype with 10 photoreceptors</span></span>
-<span id="cb198-2"><a href="analysing-data.html#cb198-2" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp <span class="ot">&lt;-</span> <span class="fu">sensmodel</span>(<span class="fu">c</span>(<span class="dv">325</span>, <span class="dv">350</span>, <span class="dv">400</span>, <span class="dv">425</span>, <span class="dv">450</span>, <span class="dv">500</span>, <span class="dv">550</span>, <span class="dv">600</span>, <span class="dv">650</span>, <span class="dv">700</span>), <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">integrate =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb198-3"><a href="analysing-data.html#cb198-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-4"><a href="analysing-data.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to percentages, just to colour the plot</span></span>
-<span id="cb198-5"><a href="analysing-data.html#cb198-5" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp.colours <span class="ot">&lt;-</span> fakemantisshrimp <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb198-6"><a href="analysing-data.html#cb198-6" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp.colours[, <span class="st">&quot;wl&quot;</span>] <span class="ot">&lt;-</span> fakemantisshrimp[, <span class="st">&quot;wl&quot;</span>]</span>
-<span id="cb198-7"><a href="analysing-data.html#cb198-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-8"><a href="analysing-data.html#cb198-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fakemantisshrimp, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakemantisshrimp.colours), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Absorbance&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-87"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-87-1.png" alt="Visual system of a pretend mantis shrimp with 10 cones" width="384" />
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="analysing-data.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an arbitrary visual phenotype with 10 photoreceptors</span></span>
+<span id="cb202-2"><a href="analysing-data.html#cb202-2" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp <span class="ot">&lt;-</span> <span class="fu">sensmodel</span>(<span class="fu">c</span>(<span class="dv">325</span>, <span class="dv">350</span>, <span class="dv">400</span>, <span class="dv">425</span>, <span class="dv">450</span>, <span class="dv">500</span>, <span class="dv">550</span>, <span class="dv">600</span>, <span class="dv">650</span>, <span class="dv">700</span>), <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">integrate =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb202-3"><a href="analysing-data.html#cb202-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-4"><a href="analysing-data.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to percentages, just to colour the plot</span></span>
+<span id="cb202-5"><a href="analysing-data.html#cb202-5" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp.colours <span class="ot">&lt;-</span> fakemantisshrimp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb202-6"><a href="analysing-data.html#cb202-6" aria-hidden="true" tabindex="-1"></a>fakemantisshrimp.colours[, <span class="st">&quot;wl&quot;</span>] <span class="ot">&lt;-</span> fakemantisshrimp[, <span class="st">&quot;wl&quot;</span>]</span>
+<span id="cb202-7"><a href="analysing-data.html#cb202-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-8"><a href="analysing-data.html#cb202-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fakemantisshrimp, <span class="at">col =</span> <span class="fu">spec2rgb</span>(fakemantisshrimp.colours), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Absorbance&quot;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-89"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-89-1.png" alt="Visual system of a pretend mantis shrimp with 10 cones" width="384" />
 <p class="caption">
 Figure 3.18: Visual system of a pretend mantis shrimp with 10 cones
 </p>
 </div>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="analysing-data.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run visual model and calculate colour distances</span></span>
-<span id="cb199-2"><a href="analysing-data.html#cb199-2" aria-hidden="true" tabindex="-1"></a>vm.fms <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> fakemantisshrimp, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">achromatic =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb199-3"><a href="analysing-data.html#cb199-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-4"><a href="analysing-data.html#cb199-4" aria-hidden="true" tabindex="-1"></a>JND.fms <span class="ot">&lt;-</span> <span class="fu">coldist</span>(vm.fms, <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="analysing-data.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run visual model and calculate colour distances</span></span>
+<span id="cb203-2"><a href="analysing-data.html#cb203-2" aria-hidden="true" tabindex="-1"></a>vm.fms <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">visual =</span> fakemantisshrimp, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">achromatic =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb203-3"><a href="analysing-data.html#cb203-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-4"><a href="analysing-data.html#cb203-4" aria-hidden="true" tabindex="-1"></a>JND.fms <span class="ot">&lt;-</span> <span class="fu">coldist</span>(vm.fms, <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## Calculating noise-weighted Euclidean distances</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="analysing-data.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(JND.fms)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="analysing-data.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(JND.fms)</span></code></pre></div>
 <pre><code>##                  patch1              patch2        dS dL
 ## 1 Goodenia_heterophylla Goodenia_geniculata 16.297557 NA
 ## 2 Goodenia_heterophylla   Goodenia_gracilis 48.390309 NA
@@ -1257,37 +1287,37 @@ Figure 3.18: Visual system of a pretend mantis shrimp with 10 cones
 <div id="image-based-colour-classification" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Image-based colour classification</h3>
 <p>We first import our images with <code>getimg()</code>, which functions in a similar manner to <code>getspec()</code>. Since we are importing more than one image, we can simply point the function to the folder containing the images, and it will use parallel processing (where possible) to import any jpg, bmp, or png images in the folder. As with the raw spectra, these images are also available at the package repository [here][data-location], but are included in the package installation for convenience.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="analysing-data.html#cb203-1" aria-hidden="true" tabindex="-1"></a>butterflies <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="analysing-data.html#cb207-1" aria-hidden="true" tabindex="-1"></a>butterflies <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
 <pre><code>## 2 files found; importing images.</code></pre>
 <p>The segmentation of RGB images into discrete colour-classes is an useful step on the road to several analyses, and this is carried out in <code>pavo</code> via <code>classify()</code>. The function currently implements k-means clustering which, and offers some flexibility in the way in which it is carried out. In the simplest case, we can specify an image or image(s) as well as the number of discrete colours in each, and allow the k-means clustering algorithm to do its work. <strong>Note that the specification of <em>k</em>, the number of discrete colours in an image, is a crucial step to be estimated <em>a priori</em> beforehand</strong>, typically through the use of visual modelling to estimate the number of discriminable colours in an ‘objective’ manner. There are a suite of possible ways in which this may be achieved, though, with one detailed below as part of example 2.</p>
 <p>Since we have two images, with (arguably) four and three colours each, including the white background, we can specify this information using <code>kcols</code>, before visualising the results with <code>summary</code>. The <code>summary</code> function, with <code>plot = TRUE</code>, is also particularly useful for understanding the colour-class labels, or ID’s, assigned to each colour, as well as visualising the accuracy of the classification process, which may be enhanced by specifying strongly-contrasting ‘false’ colours for plotting through the <code>col</code> argument.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="analysing-data.html#cb205-1" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="analysing-data.html#cb209-1" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## Image classification in progress...</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="analysing-data.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we could simply feed the list of images to summary, rather than</span></span>
-<span id="cb207-2"><a href="analysing-data.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specifying individual images, and they would progress automatically</span></span>
-<span id="cb207-3"><a href="analysing-data.html#cb207-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with user input.</span></span>
-<span id="cb207-4"><a href="analysing-data.html#cb207-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(butterflies_class[[<span class="dv">2</span>]], <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-90"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-90-1.png" alt="The k-means classified images of our butterflies, along with their identified colour palettes" width="480" />
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="analysing-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we could simply feed the list of images to summary, rather than</span></span>
+<span id="cb211-2"><a href="analysing-data.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specifying individual images, and they would progress automatically</span></span>
+<span id="cb211-3"><a href="analysing-data.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with user input.</span></span>
+<span id="cb211-4"><a href="analysing-data.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(butterflies_class[[<span class="dv">2</span>]], <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-92"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-92-1.png" alt="The k-means classified images of our butterflies, along with their identified colour palettes" width="480" />
 <p class="caption">
 Figure 3.19: The k-means classified images of our butterflies, along with their identified colour palettes
 </p>
 </div>
 <p>There are other options available, which may be of particular use when the classification process is not producing the results that might be expected. If analysing similar images with homologous colour patterns (e.g. individuals within a species), we could specify a single ‘reference’ image in a list to be initially classified, using <code>refID</code>, with the RGB centres identified in this reference image used as pre-specified cluster centres in subsequent images. This helps to ensure that homologous pattern elements are reliably identified and classified between images. The <code>classify()</code> function also offers an interactive option, via <code>interactive = TRUE</code>, wherein we can interactively click on representative colours within an image (or images individually), with the RGB values then used as cluster centres. This is particularly useful when images are being erroneously classified, since the standard k-means process randomly selects initial centres and so may (by chance) miss smaller patches, or confuse similar colours. By specifying the initial RGB centres interactively, it can be easier for the process to distinguish or ‘pull apart’ colours in such circumstances. Ultimately, there are several combinations of options available during classification, which are also documented in the help file. For our butterflies, for example, we could use any of the following (though some would be very ill-advised):</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="analysing-data.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatic classification.</span></span>
-<span id="cb208-2"><a href="analysing-data.html#cb208-2" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="analysing-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatic classification.</span></span>
+<span id="cb212-2"><a href="analysing-data.html#cb212-2" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## Image classification in progress...</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="analysing-data.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatic classification using a reference image, identified by name.</span></span>
-<span id="cb210-2"><a href="analysing-data.html#cb210-2" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">refID =</span> <span class="st">&#39;h_melpomene&#39;</span>, <span class="at">kcols =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="analysing-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatic classification using a reference image, identified by name.</span></span>
+<span id="cb214-2"><a href="analysing-data.html#cb214-2" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">refID =</span> <span class="st">&#39;h_melpomene&#39;</span>, <span class="at">kcols =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Image classification in progress...</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="analysing-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification using interactively-specified centres for each image, with no</span></span>
-<span id="cb212-2"><a href="analysing-data.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="co"># need to specify kcols (since it will be inferred from the numbers of colours selected)</span></span>
-<span id="cb212-3"><a href="analysing-data.html#cb212-3" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">interactive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb212-4"><a href="analysing-data.html#cb212-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb212-5"><a href="analysing-data.html#cb212-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification using interactively-specified centres for the single reference image</span></span>
-<span id="cb212-6"><a href="analysing-data.html#cb212-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (here, the first in the list). We could also specify reference image using it&#39;s name, </span></span>
-<span id="cb212-7"><a href="analysing-data.html#cb212-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as above.</span></span>
-<span id="cb212-8"><a href="analysing-data.html#cb212-8" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">refID =</span> <span class="dv">1</span>, <span class="at">interactive =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="analysing-data.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification using interactively-specified centres for each image, with no</span></span>
+<span id="cb216-2"><a href="analysing-data.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="co"># need to specify kcols (since it will be inferred from the numbers of colours selected)</span></span>
+<span id="cb216-3"><a href="analysing-data.html#cb216-3" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">interactive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb216-4"><a href="analysing-data.html#cb216-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb216-5"><a href="analysing-data.html#cb216-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Classification using interactively-specified centres for the single reference image</span></span>
+<span id="cb216-6"><a href="analysing-data.html#cb216-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (here, the first in the list). We could also specify reference image using it&#39;s name, </span></span>
+<span id="cb216-7"><a href="analysing-data.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as above.</span></span>
+<span id="cb216-8"><a href="analysing-data.html#cb216-8" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">refID =</span> <span class="dv">1</span>, <span class="at">interactive =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="adjacency-and-boundary-strength-analyses-and-overall-pattern-contrasts" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Adjacency and Boundary Strength Analyses, and Overall Pattern Contrasts</h3>
@@ -1295,19 +1325,19 @@ Figure 3.19: The k-means classified images of our butterflies, along with their 
 <div id="example-1-simple-mounted-butterflies" class="section level4" number="3.2.2.1">
 <h4><span class="header-section-number">3.2.2.1</span> Example 1 (simple): mounted butterflies</h4>
 <p>We’ll begin with a simple example using mounted butterflies, by first loading and classifying our images in the manner outlined above. For the adjacency analysis proper, we’ll specify a full x-dimension scale of 200 mm using <code>xscale</code> (which could be ignored if we specify scales using <code>procimg()</code>), and a sampling density of 200, for a 200 x 200 grid. Since the white background of our images is fake and of no interest, we will also exclude it by specifying the colour-class ID that corresponds to it (for more complex backgrounds, we could instead use <code>procimg()</code>, as above, and ignore this argument).</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="analysing-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up our images</span></span>
-<span id="cb213-2"><a href="analysing-data.html#cb213-2" aria-hidden="true" tabindex="-1"></a>butterflies <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="analysing-data.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up our images</span></span>
+<span id="cb217-2"><a href="analysing-data.html#cb217-2" aria-hidden="true" tabindex="-1"></a>butterflies <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
 <pre><code>## 2 files found; importing images.</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="analysing-data.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatically classify discrete colour patches (as confirmed by spectral modelling)</span></span>
-<span id="cb215-2"><a href="analysing-data.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using k-means clustering, with values of &#39;k&#39; that have been validated a priori.</span></span>
-<span id="cb215-3"><a href="analysing-data.html#cb215-3" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="analysing-data.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatically classify discrete colour patches (as confirmed by spectral modelling)</span></span>
+<span id="cb219-2"><a href="analysing-data.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using k-means clustering, with values of &#39;k&#39; that have been validated a priori.</span></span>
+<span id="cb219-3"><a href="analysing-data.html#cb219-3" aria-hidden="true" tabindex="-1"></a>butterflies_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(butterflies, <span class="at">kcols =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## Image classification in progress...</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="analysing-data.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the adjacency analysis, subsampling the image in a 200x200 grid, and excluding</span></span>
-<span id="cb217-2"><a href="analysing-data.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the white background.</span></span>
-<span id="cb217-3"><a href="analysing-data.html#cb217-3" aria-hidden="true" tabindex="-1"></a>butterflies_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(butterflies_class, <span class="at">xscale =</span> <span class="dv">200</span>, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">bkgID =</span> <span class="dv">1</span>)</span>
-<span id="cb217-4"><a href="analysing-data.html#cb217-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-5"><a href="analysing-data.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
-<span id="cb217-6"><a href="analysing-data.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(butterflies_adj)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="analysing-data.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the adjacency analysis, subsampling the image in a 200x200 grid, and excluding</span></span>
+<span id="cb221-2"><a href="analysing-data.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the white background.</span></span>
+<span id="cb221-3"><a href="analysing-data.html#cb221-3" aria-hidden="true" tabindex="-1"></a>butterflies_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(butterflies_class, <span class="at">xscale =</span> <span class="dv">200</span>, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">bkgID =</span> <span class="dv">1</span>)</span>
+<span id="cb221-4"><a href="analysing-data.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-5"><a href="analysing-data.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
+<span id="cb221-6"><a href="analysing-data.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(butterflies_adj)</span></code></pre></div>
 <pre><code>##             k     N n_off       p_1       p_2       p_3        p_4     q_1_1
 ## h_melpomene 4 54064  5111 0.5833824 0.3408824 0.0406250 0.03511029 0.5649970
 ## papilio     3 63241  4371 0.1995597 0.5609434 0.2394969         NA 0.1726728
@@ -1330,36 +1360,36 @@ Figure 3.19: The k-means classified images of our butterflies, along with their 
 ## h_melpomene     NA    NA    NA     NA
 ## papilio         NA    NA    NA     NA</code></pre>
 <p>The output is a suite of statistics describing colour pattern structure and geometry in a tidy data frame that, since we fed it a list of images, contains one row for each of our samples. As always, the function’s help file (<code>?adjacent</code>) summarises the meaning of each output variable, and the original references listed therein contain the full discussion. Note that some of the output is <code>NA</code>, which might occur when the focal statistic simply makes no sense for the image in question (such as the transition frequency between colour categories 3 and 4, for an image that contains only 3 colour categories). Others may result when we do not give <code>adjacent()</code> enough information, such as the colour-distances required to calculate the boundary-strength statistics, or the colourmetrics required for overall pattern contrast. If we do give the function this information, we can see that those final variables now contain sensible output.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="analysing-data.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a fake matrix of pairwise colour- and luminance distances between all</span></span>
-<span id="cb219-2"><a href="analysing-data.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="co"># colour patten elements, as might be attained through visual modelling of spectral data.</span></span>
-<span id="cb219-3"><a href="analysing-data.html#cb219-3" aria-hidden="true" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">c1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb219-4"><a href="analysing-data.html#cb219-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">c2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</span>
-<span id="cb219-5"><a href="analysing-data.html#cb219-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dS =</span> <span class="fu">c</span>(<span class="fl">10.6</span>, <span class="fl">5.1</span>, <span class="fl">4.4</span>),</span>
-<span id="cb219-6"><a href="analysing-data.html#cb219-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dL =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.5</span>, <span class="fl">3.2</span>))</span>
-<span id="cb219-7"><a href="analysing-data.html#cb219-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb219-8"><a href="analysing-data.html#cb219-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
-<span id="cb219-9"><a href="analysing-data.html#cb219-9" aria-hidden="true" tabindex="-1"></a>distances</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="analysing-data.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a fake matrix of pairwise colour- and luminance distances between all</span></span>
+<span id="cb223-2"><a href="analysing-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="co"># colour patten elements, as might be attained through visual modelling of spectral data.</span></span>
+<span id="cb223-3"><a href="analysing-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">c1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb223-4"><a href="analysing-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">c2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb223-5"><a href="analysing-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dS =</span> <span class="fu">c</span>(<span class="fl">10.6</span>, <span class="fl">5.1</span>, <span class="fl">4.4</span>),</span>
+<span id="cb223-6"><a href="analysing-data.html#cb223-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dL =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.5</span>, <span class="fl">3.2</span>))</span>
+<span id="cb223-7"><a href="analysing-data.html#cb223-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-8"><a href="analysing-data.html#cb223-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
+<span id="cb223-9"><a href="analysing-data.html#cb223-9" aria-hidden="true" tabindex="-1"></a>distances</span></code></pre></div>
 <pre><code>##   c1 c2   dS  dL
 ## 1  1  2 10.6 1.1
 ## 2  1  3  5.1 2.5
 ## 3  2  3  4.4 3.2</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="analysing-data.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And our fake hue angles (in radians), saturation, and luminance values, for each</span></span>
-<span id="cb221-2"><a href="analysing-data.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="co"># colour pattern element</span></span>
-<span id="cb221-3"><a href="analysing-data.html#cb221-3" aria-hidden="true" tabindex="-1"></a>hsl_vals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patch =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb221-4"><a href="analysing-data.html#cb221-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">hue =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">1.6</span>),</span>
-<span id="cb221-5"><a href="analysing-data.html#cb221-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lum =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
-<span id="cb221-6"><a href="analysing-data.html#cb221-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sat =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">1.1</span>, <span class="fl">6.3</span>))</span>
-<span id="cb221-7"><a href="analysing-data.html#cb221-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb221-8"><a href="analysing-data.html#cb221-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
-<span id="cb221-9"><a href="analysing-data.html#cb221-9" aria-hidden="true" tabindex="-1"></a>hsl_vals</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="analysing-data.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And our fake hue angles (in radians), saturation, and luminance values, for each</span></span>
+<span id="cb225-2"><a href="analysing-data.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="co"># colour pattern element</span></span>
+<span id="cb225-3"><a href="analysing-data.html#cb225-3" aria-hidden="true" tabindex="-1"></a>hsl_vals <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patch =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb225-4"><a href="analysing-data.html#cb225-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">hue =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">1.6</span>),</span>
+<span id="cb225-5"><a href="analysing-data.html#cb225-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lum =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">7</span>),</span>
+<span id="cb225-6"><a href="analysing-data.html#cb225-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sat =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">1.1</span>, <span class="fl">6.3</span>))</span>
+<span id="cb225-7"><a href="analysing-data.html#cb225-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-8"><a href="analysing-data.html#cb225-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
+<span id="cb225-9"><a href="analysing-data.html#cb225-9" aria-hidden="true" tabindex="-1"></a>hsl_vals</span></code></pre></div>
 <pre><code>##   patch hue lum sat
 ## 1     1 1.2  10 3.5
 ## 2     2 2.2   5 1.1
 ## 3     3 1.6   7 6.3</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="analysing-data.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now feed this information into the adjacency analysis using the &#39;less-colourful&#39;</span></span>
-<span id="cb223-2"><a href="analysing-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of our two images, for convenience (though this could be readily extended to</span></span>
-<span id="cb223-3"><a href="analysing-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="co"># include a list of images along with a list of distances and hsl values)</span></span>
-<span id="cb223-4"><a href="analysing-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="fu">adjacent</span>(butterflies_class[[<span class="dv">2</span>]], <span class="at">xscale =</span> <span class="dv">200</span>, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">bkgID =</span> <span class="dv">1</span>, <span class="at">coldists =</span> distances, <span class="at">hsl =</span> hsl_vals)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="analysing-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now feed this information into the adjacency analysis using the &#39;less-colourful&#39;</span></span>
+<span id="cb227-2"><a href="analysing-data.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of our two images, for convenience (though this could be readily extended to</span></span>
+<span id="cb227-3"><a href="analysing-data.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="co"># include a list of images along with a list of distances and hsl values)</span></span>
+<span id="cb227-4"><a href="analysing-data.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="fu">adjacent</span>(butterflies_class[[<span class="dv">2</span>]], <span class="at">xscale =</span> <span class="dv">200</span>, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">bkgID =</span> <span class="dv">1</span>, <span class="at">coldists =</span> distances, <span class="at">hsl =</span> hsl_vals)</span></code></pre></div>
 <pre><code>##         k     N n_off       p_1       p_2       p_3     q_1_1       q_1_2
 ## papilio 3 63241  4371 0.1995597 0.5609434 0.2394969 0.1726728 0.006941699
 ##             q_2_2      q_1_3      q_2_3     q_3_3     t_1_2     t_1_3     t_2_3
@@ -1376,65 +1406,65 @@ Figure 3.19: The k-means classified images of our butterflies, along with their 
 <div id="example-2-complex-whole-visual-environments" class="section level4" number="3.2.2.2">
 <h4><span class="header-section-number">3.2.2.2</span> Example 2 (complex): whole visual environments</h4>
 <p>Of course colour patterns are not always so simple, and we may want to analyse the spatial geometry of more complex or subtle scenes. In such cases, it may be preferable to largely forego image-based clustering and classification altogether and instead use spectral data directly in an adjacency-style analysis <span class="citation">(as per <span>‘method 1’</span> in <a href="#ref-Endler2012" role="doc-biblioref">Endler 2012</a>)</span>. One such approach would have us take spectral measurements across a patch in an evenly-spaced grid</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="analysing-data.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up our image of a camouflaged lizard</span></span>
-<span id="cb225-2"><a href="analysing-data.html#cb225-2" aria-hidden="true" tabindex="-1"></a>lizard <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/vig/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="analysing-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up our image of a camouflaged lizard</span></span>
+<span id="cb229-2"><a href="analysing-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a>lizard <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="fu">system.file</span>(<span class="st">&quot;testdata/images/vig/&quot;</span>, <span class="at">package =</span> <span class="st">&#39;pavo&#39;</span>))</span></code></pre></div>
 <pre><code>## 1 files found; importing images.</code></pre>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="analysing-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at it</span></span>
-<span id="cb227-2"><a href="analysing-data.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lizard)</span>
-<span id="cb227-3"><a href="analysing-data.html#cb227-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb227-4"><a href="analysing-data.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="co"># And overlay a simple &#39;sampling grid&#39; that might guide us as to where we should collect</span></span>
-<span id="cb227-5"><a href="analysing-data.html#cb227-5" aria-hidden="true" tabindex="-1"></a><span class="co"># our reflectance measurements. Note that the grid here is likely too coarse to capture the necessary detail,</span></span>
-<span id="cb227-6"><a href="analysing-data.html#cb227-6" aria-hidden="true" tabindex="-1"></a><span class="co"># though the sampling density is something to be closely considered on a case-by-case basis</span></span>
-<span id="cb227-7"><a href="analysing-data.html#cb227-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lizard)</span>
-<span id="cb227-8"><a href="analysing-data.html#cb227-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">expand.grid</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>), <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>)), <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-95"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-95-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="45%" />
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="analysing-data.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at it</span></span>
+<span id="cb231-2"><a href="analysing-data.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lizard)</span>
+<span id="cb231-3"><a href="analysing-data.html#cb231-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-4"><a href="analysing-data.html#cb231-4" aria-hidden="true" tabindex="-1"></a><span class="co"># And overlay a simple &#39;sampling grid&#39; that might guide us as to where we should collect</span></span>
+<span id="cb231-5"><a href="analysing-data.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="co"># our reflectance measurements. Note that the grid here is likely too coarse to capture the necessary detail,</span></span>
+<span id="cb231-6"><a href="analysing-data.html#cb231-6" aria-hidden="true" tabindex="-1"></a><span class="co"># though the sampling density is something to be closely considered on a case-by-case basis</span></span>
+<span id="cb231-7"><a href="analysing-data.html#cb231-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lizard)</span>
+<span id="cb231-8"><a href="analysing-data.html#cb231-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">expand.grid</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>), <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>)), <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-97"></span>
+<img src="colsci-book_files/figure-html/unnamed-chunk-97-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="45%" />
 <p class="caption">
 Figure 3.20: A cryptic lizard, along with a possible sampling grid for spectral measurement.
 </p>
 </div>
 <p>For the sake of this example we’ll simulate 100 reflectance spectra, as though we had collected them following the above grid. We’ll do this by creating four very similar groups of of 25 spectra, which will also allow us to get a sense of how our clustering methods perform. Of course real spectra will be more variable, but the same principles apply.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="analysing-data.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12352</span>)  <span class="co"># For reprodicubility</span></span>
-<span id="cb228-2"><a href="analysing-data.html#cb228-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-3"><a href="analysing-data.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some fake spectra that were grid-sampled across our scene</span></span>
-<span id="cb228-4"><a href="analysing-data.html#cb228-4" aria-hidden="true" tabindex="-1"></a>fakescene <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb228-5"><a href="analysing-data.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">320</span>, <span class="dv">330</span>), <span class="dv">20</span>))),</span>
-<span id="cb228-6"><a href="analysing-data.html#cb228-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">440</span>, <span class="dv">450</span>), <span class="dv">20</span>))),</span>
-<span id="cb228-7"><a href="analysing-data.html#cb228-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">550</span>, <span class="dv">560</span>), <span class="dv">20</span>))),</span>
-<span id="cb228-8"><a href="analysing-data.html#cb228-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">650</span>, <span class="dv">660</span>), <span class="dv">20</span>)))</span>
-<span id="cb228-9"><a href="analysing-data.html#cb228-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb228-10"><a href="analysing-data.html#cb228-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-11"><a href="analysing-data.html#cb228-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert them to rspce objects</span></span>
-<span id="cb228-12"><a href="analysing-data.html#cb228-12" aria-hidden="true" tabindex="-1"></a>fakescene <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakescene))</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="analysing-data.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12352</span>)  <span class="co"># For reprodicubility</span></span>
+<span id="cb232-2"><a href="analysing-data.html#cb232-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb232-3"><a href="analysing-data.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some fake spectra that were grid-sampled across our scene</span></span>
+<span id="cb232-4"><a href="analysing-data.html#cb232-4" aria-hidden="true" tabindex="-1"></a>fakescene <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb232-5"><a href="analysing-data.html#cb232-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">320</span>, <span class="dv">330</span>), <span class="dv">20</span>))),</span>
+<span id="cb232-6"><a href="analysing-data.html#cb232-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">440</span>, <span class="dv">450</span>), <span class="dv">20</span>))),</span>
+<span id="cb232-7"><a href="analysing-data.html#cb232-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">550</span>, <span class="dv">560</span>), <span class="dv">20</span>))),</span>
+<span id="cb232-8"><a href="analysing-data.html#cb232-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="cf">function</span>(x) <span class="fu">dnorm</span>(<span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">650</span>, <span class="dv">660</span>), <span class="dv">20</span>)))</span>
+<span id="cb232-9"><a href="analysing-data.html#cb232-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb232-10"><a href="analysing-data.html#cb232-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb232-11"><a href="analysing-data.html#cb232-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert them to rspce objects</span></span>
+<span id="cb232-12"><a href="analysing-data.html#cb232-12" aria-hidden="true" tabindex="-1"></a>fakescene <span class="ot">&lt;-</span> <span class="fu">as.rspec</span>(<span class="fu">data.frame</span>(<span class="at">wl =</span> <span class="dv">300</span><span class="sc">:</span><span class="dv">700</span>, fakescene))</span></code></pre></div>
 <p>Now instead of calling <code>cluster()</code> on the image and arbitrarily selecting <code>kcols</code> (which would likely be quite inaccurate due to the complexity of the scene), we can visually model the spectra, calculate the colour-distances between them, and cluster the results into a data-image that can be fed directly into <code>adjacent()</code>. Below we’ll use a centroid-based ‘hartigan’ clustering method via the package <code>NbClust</code>, but there are numerous possible approaches that might be used, which should be closely considered with reference to the original methods’ publications.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="analysing-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visually model our spectra in a tetrahedral model of the blue tit, specifying</span></span>
-<span id="cb229-2"><a href="analysing-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="co"># relative = FALSE so that we can estimate noise-calibrated distances.</span></span>
-<span id="cb229-3"><a href="analysing-data.html#cb229-3" aria-hidden="true" tabindex="-1"></a>vis.fakescene <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(fakescene, <span class="at">visual =</span> <span class="st">&#39;bluetit&#39;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="dv">10000</span>)</span>
-<span id="cb229-4"><a href="analysing-data.html#cb229-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-5"><a href="analysing-data.html#cb229-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate noise-weighted distances, before converting them to xyz coordinates</span></span>
-<span id="cb229-6"><a href="analysing-data.html#cb229-6" aria-hidden="true" tabindex="-1"></a><span class="co"># in noise-corrected colourspace.</span></span>
-<span id="cb229-7"><a href="analysing-data.html#cb229-7" aria-hidden="true" tabindex="-1"></a>jnd.fakescene <span class="ot">&lt;-</span> <span class="fu">jnd2xyz</span>(<span class="fu">coldist</span>(vis.fakescene))</span>
-<span id="cb229-8"><a href="analysing-data.html#cb229-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-9"><a href="analysing-data.html#cb229-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a distance matrix, for clustering</span></span>
-<span id="cb229-10"><a href="analysing-data.html#cb229-10" aria-hidden="true" tabindex="-1"></a>jnd.mat <span class="ot">&lt;-</span> <span class="fu">dist</span>(jnd.fakescene, <span class="at">method =</span> <span class="st">&#39;euclidean&#39;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb229-11"><a href="analysing-data.html#cb229-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-12"><a href="analysing-data.html#cb229-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Zero all distance &lt; 1 (&#39;just noticeable distance&#39;, in this model), which corresponds</span></span>
-<span id="cb229-13"><a href="analysing-data.html#cb229-13" aria-hidden="true" tabindex="-1"></a><span class="co"># to a theoretical threshold of discrimination in the receptor-noise limited</span></span>
-<span id="cb229-14"><a href="analysing-data.html#cb229-14" aria-hidden="true" tabindex="-1"></a><span class="co"># model.</span></span>
-<span id="cb229-15"><a href="analysing-data.html#cb229-15" aria-hidden="true" tabindex="-1"></a>jnd.mat[<span class="fu">which</span>(jnd.mat <span class="sc">&lt;</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb229-16"><a href="analysing-data.html#cb229-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-17"><a href="analysing-data.html#cb229-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up a library and use k-means clustering to estimate the number of discrete</span></span>
-<span id="cb229-18"><a href="analysing-data.html#cb229-18" aria-hidden="true" tabindex="-1"></a><span class="co"># colours present in our sample.</span></span>
-<span id="cb229-19"><a href="analysing-data.html#cb229-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NbClust)</span>
-<span id="cb229-20"><a href="analysing-data.html#cb229-20" aria-hidden="true" tabindex="-1"></a>clust <span class="ot">&lt;-</span> <span class="fu">NbClust</span>(jnd.fakescene, <span class="at">diss =</span> jnd.mat, <span class="at">distance =</span> <span class="cn">NULL</span>, <span class="at">method =</span> <span class="st">&#39;centroid&#39;</span>, <span class="at">index =</span> <span class="st">&#39;hartigan&#39;</span>)</span>
-<span id="cb229-21"><a href="analysing-data.html#cb229-21" aria-hidden="true" tabindex="-1"></a>clust<span class="sc">$</span>Best.nc</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="analysing-data.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visually model our spectra in a tetrahedral model of the blue tit, specifying</span></span>
+<span id="cb233-2"><a href="analysing-data.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="co"># relative = FALSE so that we can estimate noise-calibrated distances.</span></span>
+<span id="cb233-3"><a href="analysing-data.html#cb233-3" aria-hidden="true" tabindex="-1"></a>vis.fakescene <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(fakescene, <span class="at">visual =</span> <span class="st">&#39;bluetit&#39;</span>, <span class="at">relative =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="dv">10000</span>)</span>
+<span id="cb233-4"><a href="analysing-data.html#cb233-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-5"><a href="analysing-data.html#cb233-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate noise-weighted distances, before converting them to xyz coordinates</span></span>
+<span id="cb233-6"><a href="analysing-data.html#cb233-6" aria-hidden="true" tabindex="-1"></a><span class="co"># in noise-corrected colourspace.</span></span>
+<span id="cb233-7"><a href="analysing-data.html#cb233-7" aria-hidden="true" tabindex="-1"></a>jnd.fakescene <span class="ot">&lt;-</span> <span class="fu">jnd2xyz</span>(<span class="fu">coldist</span>(vis.fakescene))</span>
+<span id="cb233-8"><a href="analysing-data.html#cb233-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-9"><a href="analysing-data.html#cb233-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a distance matrix, for clustering</span></span>
+<span id="cb233-10"><a href="analysing-data.html#cb233-10" aria-hidden="true" tabindex="-1"></a>jnd.mat <span class="ot">&lt;-</span> <span class="fu">dist</span>(jnd.fakescene, <span class="at">method =</span> <span class="st">&#39;euclidean&#39;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb233-11"><a href="analysing-data.html#cb233-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-12"><a href="analysing-data.html#cb233-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Zero all distance &lt; 1 (&#39;just noticeable distance&#39;, in this model), which corresponds</span></span>
+<span id="cb233-13"><a href="analysing-data.html#cb233-13" aria-hidden="true" tabindex="-1"></a><span class="co"># to a theoretical threshold of discrimination in the receptor-noise limited</span></span>
+<span id="cb233-14"><a href="analysing-data.html#cb233-14" aria-hidden="true" tabindex="-1"></a><span class="co"># model.</span></span>
+<span id="cb233-15"><a href="analysing-data.html#cb233-15" aria-hidden="true" tabindex="-1"></a>jnd.mat[<span class="fu">which</span>(jnd.mat <span class="sc">&lt;</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb233-16"><a href="analysing-data.html#cb233-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-17"><a href="analysing-data.html#cb233-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load up a library and use k-means clustering to estimate the number of discrete</span></span>
+<span id="cb233-18"><a href="analysing-data.html#cb233-18" aria-hidden="true" tabindex="-1"></a><span class="co"># colours present in our sample.</span></span>
+<span id="cb233-19"><a href="analysing-data.html#cb233-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NbClust)</span>
+<span id="cb233-20"><a href="analysing-data.html#cb233-20" aria-hidden="true" tabindex="-1"></a>clust <span class="ot">&lt;-</span> <span class="fu">NbClust</span>(jnd.fakescene, <span class="at">diss =</span> jnd.mat, <span class="at">distance =</span> <span class="cn">NULL</span>, <span class="at">method =</span> <span class="st">&#39;centroid&#39;</span>, <span class="at">index =</span> <span class="st">&#39;hartigan&#39;</span>)</span>
+<span id="cb233-21"><a href="analysing-data.html#cb233-21" aria-hidden="true" tabindex="-1"></a>clust<span class="sc">$</span>Best.nc</span></code></pre></div>
 <pre><code>## Number_clusters     Value_Index 
 ##           4.000        1639.353</code></pre>
 <p>This approach has identified four distinct colour patches, as simulated. To be able to feed this information directly in to <code>adjacent()</code> we need to arrange the now-classified spectral data into a xyz data-image matrix, in which <code>x</code> and <code>y</code> coordinates specify the location of the sample in our scene, and the z values at each location specify the colour-class, or group, into which each sample has been classified (an integer). Many clustering packages offers the data’s classification as output in some form, so we can simply rearrange it into our original 10 x 10 sampling matrix before passing it to <code>adjacent()</code>.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="analysing-data.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rearrange the data into a colour-classified image matrix, and take a look at it.</span></span>
-<span id="cb231-2"><a href="analysing-data.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that is the same structure as the output of &#39;classify()&#39;.</span></span>
-<span id="cb231-3"><a href="analysing-data.html#cb231-3" aria-hidden="true" tabindex="-1"></a>mat.fakescene <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">as.numeric</span>(<span class="fu">unlist</span>(clust<span class="sc">$</span>Best.partition)), <span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb231-4"><a href="analysing-data.html#cb231-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mat.fakescene)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="analysing-data.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rearrange the data into a colour-classified image matrix, and take a look at it.</span></span>
+<span id="cb235-2"><a href="analysing-data.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that is the same structure as the output of &#39;classify()&#39;.</span></span>
+<span id="cb235-3"><a href="analysing-data.html#cb235-3" aria-hidden="true" tabindex="-1"></a>mat.fakescene <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">as.numeric</span>(<span class="fu">unlist</span>(clust<span class="sc">$</span>Best.partition)), <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb235-4"><a href="analysing-data.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mat.fakescene)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 ## [1,]    1    1    1    2    2    3    3    3    4     4
 ## [2,]    1    1    1    2    2    3    3    3    4     4
@@ -1442,8 +1472,8 @@ Figure 3.20: A cryptic lizard, along with a possible sampling grid for spectral 
 ## [4,]    1    1    1    2    2    3    3    3    4     4
 ## [5,]    1    1    1    2    2    3    3    3    4     4
 ## [6,]    1    1    2    2    2    3    3    4    4     4</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="analysing-data.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the adjacency analysis</span></span>
-<span id="cb233-2"><a href="analysing-data.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">adjacent</span>(mat.fakescene, <span class="at">xscale =</span> <span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="analysing-data.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the adjacency analysis</span></span>
+<span id="cb237-2"><a href="analysing-data.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="fu">adjacent</span>(mat.fakescene, <span class="at">xscale =</span> <span class="dv">200</span>)</span></code></pre></div>
 <pre><code>##     k   N n_off  p_1  p_2  p_3  p_4     q_1_1      q_1_2     q_2_2      q_2_3
 ## img 4 180    32 0.25 0.25 0.25 0.25 0.2055556 0.06111111 0.2055556 0.05555556
 ##         q_3_3      q_3_4     q_4_4   t_1_2  t_2_3   t_3_4     m   m_r   m_c  A
