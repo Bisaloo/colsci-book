@@ -1165,7 +1165,11 @@ Figure 3.15: Floral reflectance spectra represented in the CIELab model of human
 <h5><span class="header-section-number">3.1.4.6.5</span> Categorical Fly Colourspace</h5>
 <p>The categorical colour vision model of <span class="citation"><a href="#ref-Troje1993" role="doc-biblioref">Troje</a> (<a href="#ref-Troje1993" role="doc-biblioref">1993</a>)</span> is a model of dipteran vision, based on behavioural data from the blowfly <em>Lucilia</em> sp. It assumes the involvement of all four dipteran photoreceptor classes (R7 &amp; R8 ‘pale’ and ‘yellow’ subtypes), and further posits that colour vision is based on two specific opponent mechanisms (R7p - R8p, and R7y - R8y). The model assumes that all colours are perceptually grouped into one of four colour categories, and that flies are unable to distinguish between colours that fall within the same category.</p>
 <p>We’ll use the visual systems of the muscoid fly <em>Musca domestica</em>, and will begin by estimating linear (i.e. untransformed) quantum catches for each of the four photoreceptors.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="analysing-data.html#cb200-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, <span class="at">qcatch =</span> <span class="st">&#39;Qi&#39;</span>, <span class="at">visual =</span> <span class="st">&#39;musca&#39;</span>, <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>, <span class="at">relative =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="analysing-data.html#cb200-1" aria-hidden="true" tabindex="-1"></a>vis.flowers <span class="ot">&lt;-</span> <span class="fu">vismodel</span>(flowers, </span>
+<span id="cb200-2"><a href="analysing-data.html#cb200-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">qcatch =</span> <span class="st">&#39;Qi&#39;</span>, </span>
+<span id="cb200-3"><a href="analysing-data.html#cb200-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">visual =</span> <span class="st">&#39;musca&#39;</span>, </span>
+<span id="cb200-4"><a href="analysing-data.html#cb200-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">achromatic =</span> <span class="st">&#39;none&#39;</span>, </span>
+<span id="cb200-5"><a href="analysing-data.html#cb200-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">relative =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Our call to <code>colspace()</code> will then simply estimate the location of stimuli in the categorical space as the difference in relative stimulation between ‘pale’ (R7p - R8p) and ‘yellow’ (R7y - R8y) photoreceptor pairs:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -1473,7 +1477,7 @@ Figure 3.19: The k-means classified images of our butterflies, along with their 
 <span id="cb254-8"><a href="analysing-data.html#cb254-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">expand.grid</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>), <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">dim</span>(lizard)[<span class="dv">1</span>], <span class="dv">25</span>)),</span>
 <span id="cb254-9"><a href="analysing-data.html#cb254-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-111"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-111-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="45%" />
+<img src="colsci-book_files/figure-html/unnamed-chunk-111-1.png" alt="A cryptic lizard, along with a possible sampling grid for spectral measurement." width="65%" />
 <p class="caption">
 Figure 3.20: A cryptic lizard, along with a possible sampling grid for spectral measurement.
 </p>
