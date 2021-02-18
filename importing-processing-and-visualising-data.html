@@ -52,7 +52,8 @@
 </h2>
 <p>Let’s begin by loading the package.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Load the package, and set a global random-number seed for the reproducible</span>
+<code class="sourceCode R"><span class="co"># Load the package, and set a global</span>
+<span class="co"># random-number seed for the reproducible</span>
 <span class="co"># generation of fake data later on.</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://pavo.colrverse.com">pavo</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1612217</span><span class="op">)</span></code></pre></div>
@@ -71,15 +72,24 @@
 <p>The first thing we need to do is import spectral data into R using the function <code><a href="http://pavo.colrverse.com/reference/getspec.html">getspec()</a></code>. It’s worth noting that <code><a href="http://pavo.colrverse.com/reference/getspec.html">getspec()</a></code> is simply a wrapper for <code>lr_get_spec()</code> from the package <a href="https://docs.ropensci.org/lightr/"><code>lightr</code></a>, which is a more specialised and feature-rich package for the import of spectral data and metadata <span class="citation">(<a href="references.html#ref-gruson2019" role="doc-biblioref">Gruson, White, and Maia 2019</a>)</span>. Since the example spectra were obtained using Avantes software, we will need to specify that the files have the <code>.ttt</code> extension. Further, the data is organized in subdirectories for each species. <code><a href="http://pavo.colrverse.com/reference/getspec.html">getspec()</a></code> will search through subdirectories recursively, and may include the names of the subdirectories in the spectra name if desired. <code><a href="http://pavo.colrverse.com/reference/getspec.html">getspec()</a></code> also uses parallel processing thanks to the <code>future</code> package. You can check the documentation (<code>?future::plan()</code>) for more details but an easy way to set up parallel processing in most cases is to use the <code>plan("multiprocess")</code> command. A final issue with the data is that it was collected using a computer with international numbering input, which means it uses commas instead of periods as a decimal separator. We can specify that in the function call.</p>
 <p>If, for example, the raw spectral files were downloaded and placed in a directory called <code>/pavo/data_external/vignette</code>, you might execute the following command and see this output:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">specs</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/getspec.html">getspec</a></span><span class="op">(</span><span class="st">"~/pavo/data_external/vignette"</span>, ext <span class="op">=</span> <span class="st">"ttt"</span>, decimal <span class="op">=</span> <span class="st">","</span>, subdir <span class="op">=</span> <span class="cn">TRUE</span>, subdir.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">specs</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/getspec.html">getspec</a></span><span class="op">(</span><span class="st">"~/pavo/data_external/vignette"</span>,
+  ext <span class="op">=</span> <span class="st">"ttt"</span>,
+  decimal <span class="op">=</span> <span class="st">","</span>,
+  subdir <span class="op">=</span> <span class="cn">TRUE</span>,
+  subdir.names <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 <span class="co"># 213  files found; importing spectra</span>
 <span class="co"># |================================================================================| 100%, ETA 00:00</span></code></pre></div>
 <p>For convenience, however, we’ve included the spectra as an RData file in the package installation, and so will simply load it directly.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">specs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/specsdata.rds"</span>, package <span class="op">=</span> <span class="st">"pavo"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">specs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/specsdata.rds"</span>,
+  package <span class="op">=</span> <span class="st">"pavo"</span>
+<span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>And we can inspect the resulting object:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">specs</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># The data set has 213 spectra,</span>
+<span class="co"># from 300 to 700 nm, plus a 'wl' column</span>
+<span class="va">specs</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <pre><code>#&gt;     wl cardinal.0001 cardinal.0002 cardinal.0003
 #&gt; 1  300        5.7453        8.0612        8.0723
 #&gt; 2  301        6.0181        8.3926        8.8669
@@ -92,7 +102,7 @@
 #&gt; 9  308        7.0758        9.4677        9.8587
 #&gt; 10 309        7.2126       10.6172       10.5396</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">specs</span><span class="op">)</span> <span class="co"># the data set has 213 spectra, from 300 to 700 nm, plus a 'wl' column</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">specs</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 401 214</code></pre>
 <p>When <code>pavo</code> imports spectra, it creates an object of class <code>rspec</code>, which inherits attributes from the <code>data.frame</code> class:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -100,7 +110,8 @@
 <pre><code>#&gt; [1] TRUE</code></pre>
 <p>If you already have multiple spectra in a single data frame that you’d like to use with <code>pavo</code> functions, you can use the command <code><a href="http://pavo.colrverse.com/reference/as.rspec.html">as.rspec()</a></code> to convert it to an rspec object. The function will attempt to identify the wavelength variable or you can specify the column containing wavelengths with the <code>whichwl</code> argument. The default way that <code><a href="http://pavo.colrverse.com/reference/as.rspec.html">as.rspec()</a></code> handles reflectance data is to interpolate the data in 1-nm bins, as is commonly done for spectral analyses. However, this can be turned off by using: <code>interp = FALSE</code>. As an example, we will create some fake reflectance data, name the column containing wavelengths (in 0.5-nm bins) <em>wavelength</em> rather than <em>wl</em> (required for <code>pavo</code> functions to work) and also put the column containing wavelengths third rather than first.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create some fake reflectance data with wavelength column arbitrarily titled</span>
+<code class="sourceCode R"><span class="co"># Create some fake reflectance data with</span>
+<span class="co"># wavelength column arbitrarily titled</span>
 <span class="co"># and not first in the data frame:</span>
 <span class="va">fakedat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
   refl1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">801</span><span class="op">)</span>,
@@ -158,7 +169,7 @@
 #&gt; Consider using procspec() to correct them.</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">refl1</span> <span class="op">~</span> <span class="va">wl</span>, type <span class="op">=</span> <span class="st">"l"</span>, data <span class="op">=</span> <span class="va">fakedat.new2</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-11-1.png" width="384"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;"></div>
 <p>We want to stress that it is important to check the actual wavelengths contained in the data before setting this argument (<code><a href="http://pavo.colrverse.com/reference/as.rspec.html">as.rspec()</a></code> will warn you when wavelengths in the data are not present in the range specified with <code>lim</code>), otherwise <code><a href="http://pavo.colrverse.com/reference/as.rspec.html">as.rspec()</a></code> will assume that wavelengths exist when in fact they may not. For example, if we set <code>lim = c(300, 1000)</code> and plot the results, the reflectance values between 700 and 1000 nm are set to be equal since there is no information at these wavelengths in the original dataset:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fakedat.new2</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/as.rspec.html">as.rspec</a></span><span class="op">(</span><span class="va">fakedat</span>, lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -170,7 +181,7 @@
 #&gt; Consider using procspec() to correct them.</code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fakedat.new2</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">~</span> <span class="va">fakedat.new2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-12-1.png" width="384"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-12-1.png" width="480"></div>
 </div>
 <div id="subsetting-and-merging-spectral-data" class="section level3" number="2.1.3">
 <h3>
@@ -238,7 +249,10 @@ Figure 2.1: Result from <code>explorespec</code>, showing the three measurements
 #&gt; 4 303 7.947133   6.130267   7.357567
 #&gt; 5 304 8.218200   6.127933   7.195267</code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mspecs</span><span class="op">)</span> <span class="co"># data now has 71 spectra, one for each individual, and the 'wl' column</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># Data now has 71 spectra,</span>
+<span class="co"># one for each individual,</span>
+<span class="co"># and the 'wl' column</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mspecs</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 401  72</code></pre>
 <p>Now we’ll use the <code><a href="http://pavo.colrverse.com/reference/aggspec.html">aggspec()</a></code> function again, but this time to take the average spectrum for each species. However, each species has a different number of samples, so we can’t use the <code>by</code> argument as before. Instead we will use regular expressions to create a species name
 vector by removing the numbers that identify individual spectra:</p>
@@ -267,8 +281,13 @@ vector by removing the numbers that identify individual spectra:</p>
 <p>Data obtained from spectrometers often requires further processing before analysis and/or publication. For example, electrical noise can produce unwanted “spikes” in reflectance curves. The <code>pavo</code> function <code><a href="http://pavo.colrverse.com/reference/procspec.html">procspec()</a></code> can handle a variety of processing techniques. For example, the reflectance curve from the parakeet is noisy in the short (300-400 nm) and long (650-700 nm) wavelength ranges (see Figure below, black line). To eliminate this noise, we will use local regression smoothing implemented by the <code><a href="https://rdrr.io/r/stats/scatter.smooth.html">loess.smooth()</a></code> function in <code>R</code>, wrapped in the <code>opt="smooth"</code> argument of <code><a href="http://pavo.colrverse.com/reference/procspec.html">procspec()</a></code>.</p>
 <p>But first, let’s use the <code><a href="http://pavo.colrverse.com/reference/plotsmooth.html">plotsmooth()</a></code> function to determine a suitable smoothing parameter (<code>span</code>). This function allows you to set a minimum and maximum smoothing parameter to try and plots the resulting curves against the unsmoothed (raw) data in a convenient multipanel figure.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/plotsmooth.html">plotsmooth</a></span><span class="op">(</span><span class="va">sppspec</span>, minsmooth <span class="op">=</span> <span class="fl">0.05</span>, maxsmooth <span class="op">=</span> <span class="fl">0.5</span>, curves <span class="op">=</span> <span class="fl">4</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-18-1.png" width="576"></div>
+<code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/plotsmooth.html">plotsmooth</a></span><span class="op">(</span><span class="va">sppspec</span>,
+  minsmooth <span class="op">=</span> <span class="fl">0.05</span>,
+  maxsmooth <span class="op">=</span> <span class="fl">0.5</span>,
+  curves <span class="op">=</span> <span class="fl">4</span>,
+  ask <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;"></div>
 <p>From the resulting plot, we can see that <code>span = 0.2</code> is the minimum amount of smoothing to remove spectral noise while preserving the original spectral shape. Based on this value, we will now use the <code>opt</code> argument in <code><a href="http://pavo.colrverse.com/reference/procspec.html">procspec()</a></code> to smooth data for further plotting and analysis.</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spec.sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procspec.html">procspec</a></span><span class="op">(</span><span class="va">sppspec</span>, opt <span class="op">=</span> <span class="st">"smooth"</span>, span <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></code></pre></div>
@@ -303,20 +322,33 @@ Figure 2.2: Result for raw (grey line) and smoothed (red line) reflectance data 
 #&gt; Scaling spectra to a maximum value of 1</code></pre>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot results</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.min</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.min</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>,
+  xlab <span class="op">=</span> <span class="st">""</span>,
+  ylab <span class="op">=</span> <span class="st">""</span>,
+  type <span class="op">=</span> <span class="st">"l"</span>
+<span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.max</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.max</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>,
+  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+  xlab <span class="op">=</span> <span class="st">""</span>,
+  ylab <span class="op">=</span> <span class="st">""</span>,
+  type <span class="op">=</span> <span class="st">"l"</span>
+<span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.str</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">specs.str</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span><span class="op">:</span><span class="fl">700</span><span class="op">)</span>,
+  type <span class="op">=</span> <span class="st">"l"</span>,
+  xlab <span class="op">=</span> <span class="st">""</span>,
+  ylab <span class="op">=</span> <span class="st">""</span>
+<span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Normalised reflectance (%)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-21"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-21-1.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-2.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-3.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="30%"><p class="caption">
+<img src="colsci-book_files/figure-html/unnamed-chunk-21-1.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-2.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-3.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><p class="caption">
 Figure 2.3: Results for min (left), max (centre), and both normalisations (right)
 </p>
 </div>
@@ -349,8 +381,11 @@ Figure 2.3: Results for min (left), max (centre), and both normalisations (right
 #&gt; 5 -0.03173553
 #&gt; 6 -1.44428182</code></pre>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spec.bin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">spec.bin</span><span class="op">)</span> <span class="co"># transpose so wavelength are variables for the PCA</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">spec.bin</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">spec.bin</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="co"># names variables as wavelength bins</span>
+<code class="sourceCode R"><span class="co"># Transpose so wavelength are variables for the PCA</span>
+<span class="va">spec.bin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">spec.bin</span><span class="op">)</span>
+
+<span class="co"># Names variables as wavelength bins</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">spec.bin</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">spec.bin</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>
 <span class="va">spec.bin</span> <span class="op">&lt;-</span> <span class="va">spec.bin</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">]</span> <span class="co"># remove 'wl' column</span>
 <span class="va">pca1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">spec.bin</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
@@ -377,7 +412,12 @@ Figure 2.3: Results for min (left), max (centre), and both normalisations (right
 <span class="co"># Plot results</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca1</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">~</span> <span class="va">wls</span>, type <span class="op">=</span> <span class="st">"l"</span>, ylab <span class="op">=</span> <span class="st">"PC1 loading"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sppspec</span>, select <span class="op">=</span> <span class="va">sel</span>, labels.stack <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sppspec</span><span class="op">)</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"s"</span>, col <span class="op">=</span> <span class="va">colr</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sppspec</span>,
+  select <span class="op">=</span> <span class="va">sel</span>,
+  labels.stack <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sppspec</span><span class="op">)</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>,
+  type <span class="op">=</span> <span class="st">"s"</span>,
+  col <span class="op">=</span> <span class="va">colr</span>
+<span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-24"></span>
@@ -423,7 +463,7 @@ Figure 2.4: Plot of PC1 loading versus wavelength (left) and species mean spectr
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Reflectance (%)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-26"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-26-1.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-2.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-3.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="30%"><p class="caption">
+<img src="colsci-book_files/figure-html/unnamed-chunk-26-1.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-2.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-3.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><p class="caption">
 Figure 2.5: Plots showing original reflectance curve including negative values (left) and two processed curves using <code>fixneg = addmin</code> (center) and <code>fixneg = zero</code> (right).
 </p>
 </div>
@@ -557,7 +597,9 @@ Figure 2.10: Example plots created using <code>aggplot</code>. Left: using media
 </h2>
 <p>We first import our images with <code><a href="http://pavo.colrverse.com/reference/getimg.html">getimg()</a></code>, which functions in a similar manner to <code><a href="http://pavo.colrverse.com/reference/getspec.html">getspec()</a></code>. Since we are importing more than one image, we can simply point the function to the folder containing the images, and it will use parallel processing (where possible) to import any jpg, bmp, or png images in the folder. As with the raw spectra, these images are also available at the package repository [here][data-location], but are included in the package installation for convenience.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">butterflies</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/getimg.html">getimg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/images/"</span>, package <span class="op">=</span> <span class="st">"pavo"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">butterflies</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/getimg.html">getimg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/images/"</span>,
+  package <span class="op">=</span> <span class="st">"pavo"</span>
+<span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre class="cm"><code>#&gt; 2 files found; importing images.</code></pre>
 <p>When <code>pavo</code> imports images, it created a multidimensional object of class <code>rimg</code>, which inherits from the <code>array</code> class. If more than one image is imported, then these <code>rimg</code> objects are stored as elements in a list. All image-based functions in <code>pavo</code> are capable of working with such <code>rimg</code> lists, which allows for a more convenient and tidy high-throughput workflow. Note that while <code>pavo</code> will allow you to load, manipulate, and analyse as many images as your computer’s memory allows, it will throw a message if the total size of images in memory is greater than ca. 200mb, as this will result in noticeably slowed performance (everything will still work, it will just be slow). This may be ameliorated by reducing the size of individual images, such as through <code><a href="http://pavo.colrverse.com/reference/procimg.html">procimg()</a></code>, or by processing images in smaller batches. All <code>rimg</code> objects have a number of identifying attributes, drawn on by image-processing functions, which can be readily inspected.</p>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
@@ -619,7 +661,8 @@ dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c
 </h3>
 <p>Thanks to the underlying class system of <code>pavo</code>, the generic functions <code>plot</code> and <code>summary</code> recognise and respond to image-data in an appropriate manner, as is the case with spectral data. A quick call to <code>plot</code>, for example, prints our images. Note that while we call an image individually below (for convenient printing in the vignette), we could simply feed the entire list of images to <code>plot</code> and it would automatically step through each image in the list upon user input.</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Note the plot titles are taken from the file names, and can be overridden.</span>
+<code class="sourceCode R"><span class="co"># Note the plot titles are taken</span>
+<span class="co"># from the file names, and can be overridden.</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-36"></span>
@@ -646,12 +689,17 @@ Figure 2.11: Raw images of our butterflies
 </h3>
 <p>The functionality of <code><a href="http://pavo.colrverse.com/reference/procimg.html">procimg()</a></code> is currently centred on rotating and resizing images, setting a real-world image scale, and/or distinguishing the focal object from its background. Rotating an image simply requires inputting an angle, in degrees, by which the image is rotated about its centre, while resizing requires a scaling factor by which the size of image(s) are to be decreased or increased. Setting scales and distinguishing backgrounds, in contrast, are both interactive procedures, meaning that we are presented with the focal image and must select points on it using the mouse (either a line, when setting a scale, or a polygon when identifying the focus). If setting a scale, we specify a scale in our preferred units via <code>scaledist</code>, and then click the endpoints of the scale within the image (which could be a ‘formal’ scale, or simply the length of a wing or another known reference object). This information, as usual, is attached to the image as an attribute.</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Interactively specify the real-world scale of the image. Here 100 mm.</span>
+<code class="sourceCode R"><span class="co"># Interactively specify the real-world scale of the image.</span>
+<span class="co"># Here 100 mm.</span>
 <span class="va">butterflies</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procimg.html">procimg</a></span><span class="op">(</span><span class="va">butterflies</span>, scaledist <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
 <p>Distinguishing a focal object from its background is important in cases where we are analysing a broader visual scene, particularly when the background is highly heterogeneous, such as an animal in nature, and cannot be classified into a homogeneous block and identified more simply (see below). To define the object and background we specify <code>outline = TRUE</code>, which will result in being asked to click around the outline of the focal object in each image, which is then converted to a polygon — the xy coordinates of which are saved as an attribute. It is often useful to slightly smooth the resulting polygon, which can be done with Chaikin’s corner-cutting algorithm by specifying a number of <code>refinements</code>. Chaikin’s algorithm works by iteratively replacing every point by two new points 1/4 of the way to the next. The argument <code>iterations</code> specifies the number of corner cutting iterations to apply, and the default value of 1 offers a subtle smoothing effect.</p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Interactively specify a smoothed polygon around the focal objects</span>
-<span class="va">butterflies</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procimg.html">procimg</a></span><span class="op">(</span><span class="va">butterflies</span>, outline <span class="op">=</span> <span class="cn">TRUE</span>, iterations <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># Interactively specify a smoothed polygon</span>
+<span class="co"># around the focal objects</span>
+<span class="va">butterflies</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procimg.html">procimg</a></span><span class="op">(</span><span class="va">butterflies</span>,
+  outline <span class="op">=</span> <span class="cn">TRUE</span>,
+  iterations <span class="op">=</span> <span class="fl">1</span>
+<span class="op">)</span></code></pre></div>
 <p>All of these options can be simultaneously specified in a single call to <code><a href="http://pavo.colrverse.com/reference/procimg.html">procimg()</a></code>, and the <code>pavo 2.0</code> publication offers a useful example of such processing, since the more involved features are difficult to illustrate here due to their interactive nature.</p>
 
 </div>
