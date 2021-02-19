@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Analysing Data | The pavo handbook: studying biological colouration in R</title>
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.6.6/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.6.7/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
@@ -157,7 +157,7 @@
 #&gt; 4 parakeet 29.86504 572  126     63     63      Yes
 #&gt; 5    robin 37.85542 700   NA    107     NA      Yes
 #&gt; 6  tanager 30.48108 557  166     81     85      Yes</code></pre>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-44"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-44-1.png" alt="Plots from `peakshape`" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-44-2.png" alt="Plots from `peakshape`" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-44-3.png" alt="Plots from `peakshape`" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-44-4.png" alt="Plots from `peakshape`" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-44-5.png" alt="Plots from `peakshape`" width="30%"><img src="colsci-book_files/figure-html/unnamed-chunk-44-6.png" alt="Plots from `peakshape`" width="30%"><p class="caption">
 Figure 3.1: Plots from <code>peakshape</code>
@@ -166,7 +166,7 @@ Figure 3.1: Plots from <code>peakshape</code>
 <p>As it can be seen, the variable FWHM is meaningless if the curve doesn’t have a clear peak. Sometimes, such as in the case of the Cardinal (Above figure, first panel), there might be a peak which is not the point of maximum reflectance of the entire spectral curve. <code><a href="http://pavo.colrverse.com/reference/peakshape.html">peakshape()</a></code> also offers a <code>select</code> argument to facilitate subsetting the spectra data frame to, for example, focus on a single reflectance peak:</p>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/peakshape.html">peakshape</a></span><span class="op">(</span><span class="va">spec.sm</span>, select <span class="op">=</span> <span class="fl">2</span>, lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">500</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-45"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-45-1.png" alt="Plot from `peakshape`, setting the wavelength limits to 300 and 500 nm" width="480"><p class="caption">
 Figure 3.2: Plot from <code>peakshape</code>, setting the wavelength limits to 300 and 500 nm
@@ -388,7 +388,7 @@ Where <span class="math inline">\(\lambda\)</span> denotes the wavelength, <span
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Reflectance (%)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-50"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-50-1.png" alt="Plots of species mean reflectance curves with corresponding relative usml cone stimulations (insets)." width="100%"><p class="caption">
 Figure 3.3: Plots of species mean reflectance curves with corresponding relative usml cone stimulations (insets).
@@ -400,7 +400,7 @@ Figure 3.3: Plots of species mean reflectance curves with corresponding relative
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ideal_dichromat</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/sensmodel.html">sensmodel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">650</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ideal_dichromat</span>, ylab <span class="op">=</span> <span class="st">"Absorbance"</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-51"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-51-1.png" alt="The receptor sensitivities of an idealised dichromat created using `sensmodel()`." width="480"><p class="caption">
 Figure 3.4: The receptor sensitivities of an idealised dichromat created using <code><a href="http://pavo.colrverse.com/reference/sensmodel.html">sensmodel()</a></code>.
@@ -542,7 +542,7 @@ w_3^2(\Delta f_1 - \Delta f_2)^2 }{ (w_1w_2)^2 + (w_1w_3)^2 + (w_2w_3)^2 }}\]</s
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">sicdist</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/segments.html">segments</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="va">sicdist</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="va">sicdist</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># Add CI's</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># Add a 'threshold' line at dS = 1</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-57"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-57-1.png" alt="The bootstrapped colour distances between the throat, chest, and breast regions of male Sicalis citrina." width="480"><p class="caption">
 Figure 3.5: The bootstrapped colour distances between the throat, chest, and breast regions of male Sicalis citrina.
@@ -622,7 +622,7 @@ Figure 3.5: The bootstrapped colour distances between the throat, chest, and bre
   phi <span class="op">=</span> <span class="fl">25</span>,
   col <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">fakedata.c</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-60"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-60-1.png" alt="Spectral data in a receptor noise-corrected colourspace" width="384"><p class="caption">
 Figure 3.6: Spectral data in a receptor noise-corrected colourspace
@@ -696,7 +696,7 @@ z &amp;= \frac{\sqrt{3}}{2}(Q_u - \frac{Q_l + Q_m + Q_s}{3})
 <p>The output contains values for the relative stimulation of short- and long-wavelength sensitive photoreceptors associated with each flower, along with its single coordinate in dichromatic space and its r.vector (distance from the origin). To visualise where these points lie, we can simply plot them on a segment.</p>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">di.flowers</span>, col <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-63"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-63-1.png" alt="Flowers in a dichromatic colourspace, as modelled according to a canid visual system." width="384"><p class="caption">
 Figure 3.7: Flowers in a dichromatic colourspace, as modelled according to a canid visual system.
@@ -730,7 +730,7 @@ Figure 3.7: Flowers in a dichromatic colourspace, as modelled according to a can
 <p>As in the case of our dichromat, the output contains relative photoreceptor stimulations, coordinates in the Maxwell triangle, as well as the ‘hue angle’ <code>h.theta</code> and distance from the origin (<code>r.vec</code>).</p>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tri.flowers</span>, pch <span class="op">=</span> <span class="fl">21</span>, bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-65"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-65-1.png" alt="Floral reflectance in a Maxwell triangle, considering a honeybee visual system." width="384"><p class="caption">
 Figure 3.8: Floral reflectance in a Maxwell triangle, considering a honeybee visual system.
@@ -792,7 +792,7 @@ Figure 3.8: Floral reflectance in a Maxwell triangle, considering a honeybee vis
   range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
   cex <span class="op">=</span> <span class="fl">0.5</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-67"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-67-1.png" alt="Flowers in a tetrahedral colourspace modelled using the visual phenotype of the blue tit. Point size is used to force perspective" width="480"><p class="caption">
 Figure 3.9: Flowers in a tetrahedral colourspace modelled using the visual phenotype of the blue tit. Point size is used to force perspective
@@ -818,7 +818,7 @@ Figure 3.9: Flowers in a tetrahedral colourspace modelled using the visual pheno
   bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="fu"><a href="http://pavo.colrverse.com/reference/axistetra.html">axistetra</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">1.8</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-68"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-68-1.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%"><img src="colsci-book_files/figure-html/unnamed-chunk-68-2.png" alt="Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit." width="45%"><p class="caption">
 Figure 3.10: Flowers in a tetrahedral colourspace, with varied orientations and perspectives, modelled using the visual phenotype of the blue tit.
@@ -827,7 +827,7 @@ Figure 3.10: Flowers in a tetrahedral colourspace, with varied orientations and 
 <p>For tetrahedral models, another plotting option available is <code>projplot</code>, which projects colour points in the surface of a sphere encompassing the tetrahedron. This plot is particularly useful to see differences in hue.</p>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/projplot.html">projplot</a></span><span class="op">(</span><span class="va">tetra.flowers</span>, pch <span class="op">=</span> <span class="fl">20</span>, col <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-69"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-69-1.png" alt="Projection plot from a tetrahedral colour space." width="480"><p class="caption">
 Figure 3.11: Projection plot from a tetrahedral colour space.
@@ -849,7 +849,7 @@ Figure 3.11: Projection plot from a tetrahedral colour space.
 <code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/voloverlap.html">voloverlap</a></span><span class="op">(</span><span class="va">tcs.sicalis.T</span>, <span class="va">tcs.sicalis.C</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt;           vol1         vol2 overlapvol vsmallest vboth
 #&gt; 1 5.183721e-06 4.739152e-06          0         0     0</code></pre>
-<p><img src="colsci-book_files/figure-html/unnamed-chunk-71-1.png" width="40%"><img src="colsci-book_files/figure-html/unnamed-chunk-71-2.png" width="40%"></p>
+<p><img src="colsci-book_files/figure-html/unnamed-chunk-71-1.png" width="40%" style="display: block; margin: auto;"><img src="colsci-book_files/figure-html/unnamed-chunk-71-2.png" width="40%" style="display: block; margin: auto;"></p>
 <p>The function <code><a href="http://pavo.colrverse.com/reference/voloverlap.html">voloverlap()</a></code> gives the volume (<span class="math inline">\(V\)</span>) of the convex hull delimited by the overlap between the two original volumes, and two proportions are calculated from that: <span class="math display">\[\text{vsmallest} = V_{overlap} / \min(V_A, V_B)\]</span> and <span class="math display">\[\text{vboth} = V_{overlap} / (V_A + V_B)\]</span>. Thus, if one of the volumes is entirely contained in the other, <code>vsmallest</code> will equal 1. So we can clearly see that there is overlap between the throat and breast colours (of about 6%), but not between the throat and the crown colours (Figures above).</p>
 <p>Alternatively, <span class="math inline">\(\alpha\)</span>-shapes are a new tool available in <code>pavo</code> to estimate colour volumes,
 while allowing the presence of voids and pockets. <span class="math inline">\(\alpha\)</span>-shapes may thus lead to a more
@@ -864,17 +864,17 @@ on the theoretical background, please report to the related article <span class=
 <span class="va">vis_flowers</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/vismodel.html">vismodel</a></span><span class="op">(</span><span class="va">flowers</span>, visual <span class="op">=</span> <span class="st">"avg.uv"</span><span class="op">)</span>
 <span class="va">tcs_flowers</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/colspace.html">colspace</a></span><span class="op">(</span><span class="va">vis_flowers</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tcs_flowers</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-73-1.png" width="672"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-73-1.png" width="672" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="http://pavo.colrverse.com/reference/vol.html">vol</a></span><span class="op">(</span><span class="va">tcs_flowers</span>, type <span class="op">=</span> <span class="st">"alpha"</span><span class="op">)</span></code></pre></div>
 <pre class="cm"><code>#&gt; 'avalue' automatically set to 1.8275e-01</code></pre>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-74-1.png" width="672"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-74-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>Alternatively, you can set the <span class="math inline">\(\alpha\)</span> parameter to the value of your choice via the <code>avalue</code>
 argument:</p>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tcs_flowers</span><span class="op">)</span>
 <span class="fu"><a href="http://pavo.colrverse.com/reference/vol.html">vol</a></span><span class="op">(</span><span class="va">tcs_flowers</span>, type <span class="op">=</span> <span class="st">"alpha"</span>, avalue <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-76-1.png" width="672"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-76-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>In the previous examples, we focused on <span class="math inline">\(\alpha\)</span>-shapes in chromaticity diagrams since
 it is the most common space where convex hulls (that <span class="math inline">\(\alpha\)</span>-shapes aim at
 replacing) are used. But it is also possible to use <span class="math inline">\(\alpha\)</span>-shapes in other spaces,
@@ -887,7 +887,7 @@ such as perceptually uniform (noise-corrected) spaces.</p>
 <div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">xy_flowers</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/jnd2xyz.html">jnd2xyz</a></span><span class="op">(</span><span class="va">cd_flowers</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">xy_flowers</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-77-1.png" width="672"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-77-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>High-level functions to build the <span class="math inline">\(\alpha\)</span>-shape directly in <code>pavo</code> have not yet
 been implemented but you can use the <code>alphashape3d</code> package directly to compute
 the <span class="math inline">\(\alpha\)</span>-shapes, its volume and display it in a 3D interactive plot.</p>
@@ -950,7 +950,7 @@ but this time with <span class="math inline">\(\alpha\)</span>-shapes:</p>
 <code class="sourceCode R"><span class="va">vis.flowers</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/vismodel.html">vismodel</a></span><span class="op">(</span><span class="va">flowers</span>, visual <span class="op">=</span> <span class="st">"ctenophorus"</span><span class="op">)</span>
 <span class="va">tri.flowers</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/colspace.html">colspace</a></span><span class="op">(</span><span class="va">vis.flowers</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tri.flowers</span>, pch <span class="op">=</span> <span class="fl">21</span>, bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span>, gamut <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-85-1.png" width="672"></div>
+<div class="inline-figure"><img src="colsci-book_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>This information is also available in the summary, in the “Max possible chromatic volume” line:</p>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">tri.flowers</span><span class="op">)</span></code></pre></div>
@@ -1039,7 +1039,7 @@ y &amp;= E_b - 0.5(E_{uv} + E_g)
   pch <span class="op">=</span> <span class="fl">21</span>,
   bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-89"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-89-1.png" alt="Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors." width="480"><p class="caption">
 Figure 3.12: Flowers as modelled in the hymenopteran colour hexagon of Chittka (1992), overlain with coarse bee-hue sectors.
@@ -1091,7 +1091,7 @@ B &amp;= -5.17E_u + 20.25E_b - 15.08E_g
   bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span>,
   yaxt <span class="op">=</span> <span class="st">"n"</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-91"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-91-1.png" alt="Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee." width="480"><p class="caption">
 Figure 3.13: Flowers in the colour-opponent-coding space of Backhaus (1991), as modelling according to the honeybee.
@@ -1149,7 +1149,7 @@ z &amp;= \frac{Z}{X + Y + Z} = 1 - x - y
 <p>The output is simply the tristimulus values and chromaticity coordinates of stimuli, and we can visualise our results (along with a line connecting monochromatic loci, by default) by calling</p>
 <div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ciexyz.flowers</span>, pch <span class="op">=</span> <span class="fl">21</span>, bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-94"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-94-1.png" alt="Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location." width="480"><p class="caption">
 Figure 3.14: Floral reflectance in the CIEXYZ human visual model. Note that this space is not perceptually calibrated, so we cannot make inferences about the similarity or differences of colours based on their relative location.
@@ -1206,7 +1206,7 @@ Z_n &amp;= \int_{300}^{700}{R_n(\lambda)I(\lambda)\bar{z}(\lambda)\,d\lambda}
 <p>Our output now contains the tristimulus <code>XYZ</code> values, as well as their <code>Lab</code> counterparts, which are coordinates in the <code>Lab</code> space. These can also be visualised in three-dimensional <code>Lab</code> space by calling <code>plot</code>:</p>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cielab.flowers</span>, pch <span class="op">=</span> <span class="fl">21</span>, bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-96"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-96-1.png" alt="Floral reflectance spectra represented in the CIELab model of human colour sensation." width="480"><p class="caption">
 Figure 3.15: Floral reflectance spectra represented in the CIELab model of human colour sensation.
@@ -1261,7 +1261,7 @@ y &amp;= R7_y - R8_y
 <p>And it is simply the signs of these differences that define the four possible fly-colour categories (p+y+, p-y+, p+y-, p-y-), which we can see in the associated plot.</p>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cat.flowers</span>, pch <span class="op">=</span> <span class="fl">21</span>, bg <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">flowers</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-99"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-99-1.png" alt="Flowers in the categorical colourspace of Troje (1993)." width="480"><p class="caption">
 Figure 3.16: Flowers in the categorical colourspace of Troje (1993).
@@ -1418,7 +1418,7 @@ beta <span class="op">=</span> <span class="cn">FALSE</span>, integrate <span cl
   col <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">fakemantisshrimp.colours</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>,
   ylab <span class="op">=</span> <span class="st">"Absorbance"</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-103"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-103-1.png" alt="Visual system of a pretend mantis shrimp with 10 cones" width="480"><p class="caption">
 Figure 3.18: Visual system of a pretend mantis shrimp with 10 cones
@@ -1783,7 +1783,7 @@ Figure 3.20: A cryptic lizard, along with a possible sampling grid for spectral 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-02-18.</p>
+    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-02-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
