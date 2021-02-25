@@ -668,7 +668,7 @@ dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-36"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-36-1.png" alt="Raw images of our butterflies" width="384"><p class="caption">
+<img src="colsci-book_files/figure-html/unnamed-chunk-36-1.png" alt="Raw images of our butterflies" width="100%"><p class="caption">
 Figure 2.11: Raw images of our butterflies
 </p>
 </div>
@@ -693,11 +693,16 @@ Figure 2.11: Raw images of our butterflies
 <p>In brief, the algorithm allows us to gain some insight into the spatial information which can and cannot be detected by a viewer.</p>
 <p>To run the procedure, <code><a href="http://pavo.colrverse.com/reference/procimg.html">procimg()</a></code> requires three arguments: <code>obj_dist</code>, the real-world distance between the viewer and the focal object in the image, <code>obj_width</code>, the real-world width of the entire image, and <code>eye_res</code>, the resolution of the viewer in degrees. Any units of measurement are suitable for <code>obj_dist</code> and <code>obj_width</code>, but they must match. Here we’ll run our butterfly images through the process assuming a conspecific viewer at a distance of 60 cm, an image width of 10 cm, and visual acuity 0.2 CPD.</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Model the appearance of our butterflies given the reduced visual acuity of another</span>
-<span class="co"># animal viewer as per the AcuityView 2.0 algorithm (Caves &amp; Johnsen 2018). Here our</span>
-<span class="co"># butterfly is 60 cm away, the image width is 10 cm, and the spatial resolution</span>
-<span class="co"># of the viewer is 0.2-degrees.</span>
-<span class="va">butterflies_acuity</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procimg.html">procimg</a></span><span class="op">(</span><span class="va">butterflies</span>, obj_dist <span class="op">=</span> <span class="fl">60</span>, obj_width <span class="op">=</span> <span class="fl">10</span>, eye_res <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># Model the appearance of our butterflies given the reduced</span>
+<span class="co"># visual acuity of another animal viewer as per the</span>
+<span class="co"># AcuityView 2.0 algorithm (Caves &amp; Johnsen 2018). Here</span>
+<span class="co"># our butterfly is 60 cm away, the image width is 10 cm,</span>
+<span class="co"># and the spatial resolution of the viewer is 0.2-degrees.</span>
+<span class="va">butterflies_acuity</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/procimg.html">procimg</a></span><span class="op">(</span><span class="va">butterflies</span>,
+  obj_dist <span class="op">=</span> <span class="fl">60</span>,
+  obj_width <span class="op">=</span> <span class="fl">10</span>,
+  eye_res <span class="op">=</span> <span class="fl">0.2</span>
+<span class="op">)</span>
 
 <span class="co"># See the results</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
@@ -705,7 +710,7 @@ Figure 2.11: Raw images of our butterflies
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies_acuity</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-37"></span>
-<img src="colsci-book_files/figure-html/unnamed-chunk-37-1.png" alt="Images of our butterflies after modelling for the acuity of a conspecific viewer" width="384"><p class="caption">
+<img src="colsci-book_files/figure-html/unnamed-chunk-37-1.png" alt="Images of our butterflies after modelling for the acuity of a conspecific viewer" width="100%"><p class="caption">
 Figure 2.12: Images of our butterflies after modelling for the acuity of a conspecific viewer
 </p>
 </div>
@@ -794,7 +799,7 @@ Figure 2.12: Images of our butterflies after modelling for the acuity of a consp
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-02-24.</p>
+    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-02-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
