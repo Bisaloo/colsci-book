@@ -73,6 +73,7 @@ accessing-and-plotting-in-built-spectral-data
 visual-phenotypes
 estimating-quantum-catch
 the-receptor-noise-model
+a-brief-note-on-terminology-and-just-noticeable-differences-jnds
 noise-weighted-distances-with-coldist-and-bootcoldist
 converting-receptor-noise-corrected-distances-to-cartesian-coordinates
 colourspaces
