@@ -5,10 +5,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R</title>
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.7/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<meta name="generator" content="bookdown 0.22.11 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Importing, Processing, and Visualising Data | The pavo handbook: studying biological colouration in R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<meta name="description" content="2.1 Organizing Spectral Data Let’s begin by loading the package. # Load the package, and set a global # random-number seed for the reproducible # generation of fake data later on. library(pavo)...">
+<meta property="og:description" content="2.1 Organizing Spectral Data Let’s begin by loading the package. # Load the package, and set a global # random-number seed for the reproducible # generation of fake data later on. library(pavo)...">
+<meta name="twitter:description" content="2.1 Organizing Spectral Data Let’s begin by loading the package. # Load the package, and set a global # random-number seed for the reproducible # generation of fake data later on. library(pavo)...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -233,7 +241,7 @@
 <code class="sourceCode R"><span class="co"># 36 spectra plus the first (wl) column</span>
 <span class="fu"><a href="http://pavo.colrverse.com/reference/explorespec.html">explorespec</a></span><span class="op">(</span><span class="va">specs</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">37</span><span class="op">]</span>, by <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:explorespecfig"></span>
+<span style="display:block;" id="fig:explorespecfig"></span>
 <img src="colsci-book_files/figure-html/explorespecfig-1.png" alt="Result from `explorespec`, showing the three measurements for each individual cardinal in separate panels" width="576"><p class="caption">
 Figure 2.1: Result from <code>explorespec</code>, showing the three measurements for each individual cardinal in separate panels
 </p>
@@ -300,7 +308,7 @@ vector by removing the numbers that identify individual spectra:</p>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">spec.sm</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span> <span class="op">~</span> <span class="va">sppspec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-19"></span>
+<span style="display:block;" id="fig:unnamed-chunk-19"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-19-1.png" alt="Result for raw (grey line) and smoothed (red line) reflectance data for the parakeet" width="480"><p class="caption">
 Figure 2.2: Result for raw (grey line) and smoothed (red line) reflectance data for the parakeet
 </p>
@@ -347,7 +355,7 @@ Figure 2.2: Result for raw (grey line) and smoothed (red line) reflectance data 
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Normalised reflectance (%)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-21"></span>
+<span style="display:block;" id="fig:unnamed-chunk-21"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-21-1.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-2.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-21-3.png" alt="Results for min (left), max (centre), and both normalisations (right)" width="50%"><p class="caption">
 Figure 2.3: Results for min (left), max (centre), and both normalisations (right)
 </p>
@@ -420,7 +428,7 @@ Figure 2.3: Results for min (left), max (centre), and both normalisations (right
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-24"></span>
+<span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-24-1.png" alt="Plot of PC1 loading versus wavelength (left) and species mean spectra sorted vertically from lowest to highest PC1 value (right; values on right hand axis are column identities)." width="45%"><img src="colsci-book_files/figure-html/unnamed-chunk-24-2.png" alt="Plot of PC1 loading versus wavelength (left) and species mean spectra sorted vertically from lowest to highest PC1 value (right; values on right hand axis are column identities)." width="45%"><p class="caption">
 Figure 2.4: Plot of PC1 loading versus wavelength (left) and species mean spectra sorted vertically from lowest to highest PC1 value (right; values on right hand axis are column identities).
 </p>
@@ -462,7 +470,7 @@ Figure 2.4: Plot of PC1 loading versus wavelength (left) and species mean spectr
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Reflectance (%)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-26"></span>
+<span style="display:block;" id="fig:unnamed-chunk-26"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-26-1.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-2.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><img src="colsci-book_files/figure-html/unnamed-chunk-26-3.png" alt="Plots showing original reflectance curve including negative values (left) and two processed curves using `fixneg = addmin` (center) and `fixneg = zero` (right)." width="50%"><p class="caption">
 Figure 2.5: Plots showing original reflectance curve including negative values (left) and two processed curves using <code>fixneg = addmin</code> (center) and <code>fixneg = zero</code> (right).
 </p>
@@ -491,7 +499,7 @@ Figure 2.5: Plots showing original reflectance curve including negative values (
 </ol>
 <p>These options are in addition to the exploratory plotting offered by <code><a href="http://pavo.colrverse.com/reference/explorespec.html">explorespec()</a></code>, as seen in the figures in section 1. To showcase the capabilities of <code><a href="http://pavo.colrverse.com/reference/plot.rspec.html">plot.rspec()</a></code>, we will use the <code>teal</code> dataset included in <code>pavo</code>. This dataset consists of reflectance spectra from the iridescent wing patch of a green-winged teal (<em>Anas carolinensis</em>). Reflectance measurements were taken between 300 and 700 nm at different incident angles, ranging from 15° to 70° (in 5° increments) <span class="citation">(<a href="references.html#ref-Eliason2012" role="doc-biblioref">Eliason and Shawkey 2012</a>)</span>.</p>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-27"></span>
+<span style="display:block;" id="fig:unnamed-chunk-27"></span>
 <img src="fig/anas-carolinensis.jpg" alt="Anas carolinensis, by pixabay user Cock-Robin, CC0" width="100%"><p class="caption">
 Figure 2.6: Anas carolinensis, by pixabay user Cock-Robin, CC0
 </p>
@@ -505,7 +513,7 @@ Figure 2.6: Anas carolinensis, by pixabay user Cock-Robin, CC0
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">teal</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">teal</span>, type <span class="op">=</span> <span class="st">"o"</span>, col <span class="op">=</span> <span class="fu"><a href="http://pavo.colrverse.com/reference/spec2rgb.html">spec2rgb</a></span><span class="op">(</span><span class="va">teal</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-28"></span>
+<span style="display:block;" id="fig:unnamed-chunk-28"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-28-1.png" alt="Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour." width="480"><p class="caption">
 Figure 2.7: Overlay plot of the teal angle-dependent reflectance with colours of each curve being an approximation of the perceived colour.
 </p>
@@ -528,7 +536,7 @@ Figure 2.7: Overlay plot of the teal angle-dependent reflectance with colours of
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Wavelength (nm)"</span>, side <span class="op">=</span> <span class="fl">1</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"Cumulative reflectance (A.U.)"</span>, side <span class="op">=</span> <span class="fl">2</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-29"></span>
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-29-1.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%"><img src="colsci-book_files/figure-html/unnamed-chunk-29-2.png" alt="Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance" width="45%"><p class="caption">
 Figure 2.8: Stacked plot of the raw (left) and normalized (right) teal angle-dependent reflectance
 </p>
@@ -556,7 +564,7 @@ Figure 2.8: Stacked plot of the raw (left) and normalized (right) teal angle-dep
   las <span class="op">=</span> <span class="fl">1</span>, useRaster <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-31"></span>
+<span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-31-1.png" alt="Heatmap plot for angle-resolved reflectance measurements of the green-winged teal." width="480"><p class="caption">
 Figure 2.9: Heatmap plot for angle-resolved reflectance measurements of the green-winged teal.
 </p>
@@ -584,7 +592,7 @@ Figure 2.9: Heatmap plot for angle-resolved reflectance measurements of the gree
   lcol <span class="op">=</span> <span class="fl">1</span>, shadecol <span class="op">=</span> <span class="st">"grey"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>
 <span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-32"></span>
+<span style="display:block;" id="fig:unnamed-chunk-32"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-32-1.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%"><img src="colsci-book_files/figure-html/unnamed-chunk-32-2.png" alt="Example plots created using `aggplot`. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale" width="45%"><p class="caption">
 Figure 2.10: Example plots created using <code>aggplot</code>. Left: using median, standard deviation, and coloured lines. Right: using mean, standard error, and greyscale
 </p>
@@ -667,7 +675,7 @@ dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-36"></span>
+<span style="display:block;" id="fig:unnamed-chunk-36"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-36-1.png" alt="Raw images of our butterflies" width="100%"><p class="caption">
 Figure 2.11: Raw images of our butterflies
 </p>
@@ -708,7 +716,7 @@ Figure 2.11: Raw images of our butterflies
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies_acuity</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">butterflies_acuity</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span id="fig:unnamed-chunk-37"></span>
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <img src="colsci-book_files/figure-html/unnamed-chunk-37-1.png" alt="Images of our butterflies after modelling for the acuity of a conspecific viewer" width="100%"><p class="caption">
 Figure 2.12: Images of our butterflies after modelling for the acuity of a conspecific viewer
 </p>
@@ -798,7 +806,7 @@ Figure 2.12: Images of our butterflies after modelling for the acuity of a consp
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-03-14.</p>
+    <p>"<strong>The pavo handbook: studying biological colouration in R</strong>" was written by . It was last built on 2021-07-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -818,6 +826,22 @@ Figure 2.12: Images of our butterflies after modelling for the acuity of a consp
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
 </html>
